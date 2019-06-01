@@ -1,0 +1,31 @@
+{
+  "plugins": [
+    "stylelint-order",
+    "stylelint-config-rational-order/plugin"
+  ],
+  "rules": {
+    "order/properties-order": [],
+    "plugin/rational-order": [true, {
+      "border-in-box-model": false,
+      "empty-line-between-groups": true,
+    }],
+    "indentation": 2,
+    "string-quotes": "single",
+    "declaration-colon-space-before": "never",
+    "declaration-colon-space-after": "always",
+    "rule-empty-line-before": "always",
+    "media-feature-range-operator-space-before": "never",
+    "media-feature-range-operator-space-after": "always",
+    "media-feature-colon-space-before": "never",
+    "media-feature-colon-space-after": "always",
+
+    "declaration-no-important": true,
+    "declaration-block-no-duplicate-properties": true,
+    "unit-blacklist": ["em", "rem"],
+    "property-blacklist": ["float"]
+  },
+  "extends": [
+    "stylelint-config-prettier",
+    "stylelint-config-rational-order"
+  ]
+}
