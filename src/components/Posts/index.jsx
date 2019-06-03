@@ -18,7 +18,7 @@ class Posts extends PureComponent {
   }
 
   state = {
-    open: false,
+
   }
 
   render() {
@@ -35,6 +35,7 @@ class Posts extends PureComponent {
       return <p>Loading…</p>
     }
     return (
+      <>
       <ul>
         { posts.map( ( post ) => (
           <li key={ post.id }>
@@ -46,6 +47,8 @@ class Posts extends PureComponent {
           </li>
         ) ) }
       </ul>
+        <button>SHOW MORE</button>
+      </>
     )
   }
 }
