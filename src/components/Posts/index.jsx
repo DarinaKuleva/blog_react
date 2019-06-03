@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { postsFetchData } from '../../actions/postsFetch';
 
@@ -32,8 +33,10 @@ class Index extends PureComponent {
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
+            <Link to={`post-information/${post.id}`}>
             <h2>{post.title}</h2>
             <p>{post.body}</p>
+            </Link>
           </li>
         ))}
       </ul>
