@@ -1,8 +1,14 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { postsFetchData } from '../../actions/postsFetch';
 
-class Index extends Component {
+class Index extends PureComponent {
+
+  static propTypes = {
+    posts: PropTypes.array.isRequired //проверить все ли пропсы+подчеркивание
+  };
+
   componentDidMount() {
     this.props.fetchData('https://jsonplaceholder.typicode.com/posts');
   }
