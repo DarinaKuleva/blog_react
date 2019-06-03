@@ -1,11 +1,13 @@
-import React from 'react';
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
+import PostsList from './components/Posts/index'
 
-function App() {
-  return (
-    <>
-      Шаблон!
-    </>
-  );
-}
+const App = () => (
+  <main>
+    <Switch>
+      <Route exact path="/" component={PostsList}/>
+    </Switch>
+  </main>
+);
 
-export default App;
+export default App
