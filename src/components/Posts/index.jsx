@@ -1,61 +1,67 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux';
-import { postsFetchData } from '../../actions/postsFetch';
+import { connect } from 'react-redux'
+import { postsFetchData } from '../../actions/postsFetch'
+import ViewCommentsButton from '../ViewCommentsBtn'
 
-class Index extends PureComponent {
+class Posts extends PureComponent {
 
   static propTypes = {
-    posts: PropTypes.array.isRequired //проверить все ли пропсы+подчеркивание
-  };
+    posts: PropTypes.array.isRequired, //проверить все ли пропсы+подчеркивание
+    hasErrored: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired
+  }
 
   componentDidMount() {
-    this.props.fetchData('https://jsonplaceholder.typicode.com/posts');
+    this.props.fetchData( 'https://jsonplaceholder.typicode.com/posts' )
+  }
+
+  state = {
+    open: false,
   }
 
   render() {
     const {
       hasErrored,
       isLoading,
-      posts
-    } = this.props;
+      posts,
+    } = this.props
 
-    if (hasErrored) {
-      return <p>Sorry! There was an error loading the items</p>;
+    if ( hasErrored ) {
+      return <p>Sorry! There was an error loading the items</p>
     }
-
-    if (isLoading) {
-      return <p>Loading…</p>;
+    if ( isLoading ) {
+      return <p>Loading…</p>
     }
-
     return (
       <ul>
-        {posts.map((post) => (
-          <li key={post.id}>
-            <Link to={`post-information/${post.id}`}>
-            <h2>{post.title}</h2>
-            <p>{post.body}</p>
+        { posts.map( ( post ) => (
+          <li key={ post.id }>
+            <Link to={ `post-information/${ post.id }` }>
+              <h2>{ post.title }</h2>
+              <p>{ post.body }</p>
             </Link>
+            <ViewCommentsButton commentId={ post.id }/>
           </li>
-        ))}
+        ) ) }
       </ul>
-    );
+    )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ( state ) => {
   return {
     posts: state.posts,
     hasErrored: state.postsHasErrored,
-    isLoading: state.postsIsLoading
-  };
-};
+    isLoading: state.postsIsLoading,
+  }
+}
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = ( dispatch ) => {
   return {
-    fetchData: (url) => dispatch(postsFetchData(url))
-  };
-};
+    fetchData: ( url ) => dispatch( postsFetchData( url ) ),
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default connect( mapStateToProps, mapDispatchToProps )( Posts )
