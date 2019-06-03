@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import Comments from '../Comments'
 
 class PostInformation extends React.PureComponent {
 
@@ -28,6 +29,7 @@ class PostInformation extends React.PureComponent {
         <h2>Post Information</h2>
         <div>{openPost.title}</div>
         <div>{openPost.body}</div>
+        <Comments commentId = {openPost.id}/>
         <Link to="/">
           POSTS
         </Link>
