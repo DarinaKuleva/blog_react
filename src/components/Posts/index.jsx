@@ -11,7 +11,7 @@ import blog from './style.module.css'
 class Posts extends PureComponent {
 
   static propTypes = {
-    posts: PropTypes.array.isRequired, //проверить все ли пропсы+подчеркивание
+    posts: PropTypes.array.isRequired, 
     hasErrored: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
   }
