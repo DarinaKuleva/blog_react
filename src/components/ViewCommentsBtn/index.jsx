@@ -1,6 +1,8 @@
 import React from 'react'
 import Comments from '../Comments'
 
+import button from '../CreatePostBtn/style.module.css'
+
 class ViewCommentsButton extends React.PureComponent {
   state = {
     open: false,
@@ -18,7 +20,7 @@ class ViewCommentsButton extends React.PureComponent {
 
     return (
       <>
-        <button onClick={ this.onClickButton1 }>
+        <button onClick={ this.onClickButton1 } className={button.page}>
           { this.state.open ? 'hide comments' : 'show comments' }
         </button>
         { this.state.open

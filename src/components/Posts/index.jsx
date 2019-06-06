@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { postsFetchData } from '../../actions/postsFetch'
 import ViewCommentsButton from '../ViewCommentsBtn'
+import CreatePostBtn from '../CreatePostBtn'
+
+import blog from './style.module.css'
 
 class Posts extends React.PureComponent {
 
@@ -40,7 +43,7 @@ class Posts extends React.PureComponent {
       currentPage,
       postsAmount,
     } = this.state
-    
+
     const indexOfLastPost = currentPage * postsAmount
     const indexOfFirstPost = indexOfLastPost - postsAmount
     const visiblePage = posts.slice( indexOfFirstPost, indexOfLastPost )
@@ -79,16 +82,27 @@ class Posts extends React.PureComponent {
       return <p>Loading…</p>
     }
     return (
-      <>
+      <section className={blog.container}>
+        <div className={blog.header}>
+          <h1 className={blog.logo}>Blog</h1>
+          <CreatePostBtn/>
+        </div>
+        <div className={blog.sorting}>
+          <button className={blog.sorting__item}>По алфавиту</button>
+          <button className={blog.sorting__item}>По лайкам</button>
+          <button className={blog.sorting__item}>По дизлайкам</button>
+          <button className={blog.sorting__item}>Сбросить сортировку</button>
+        </div>
         <div>
+          <input placeholder="Искать" className={blog.search}/>
+        </div>
           <ul>
             { renderPosts }
           </ul>
           <ul>
             { renderPagesAmount }
           </ul>
-        </div>
-      </>
+      </section>
     )
   }
 }
