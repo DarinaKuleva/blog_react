@@ -7,7 +7,7 @@ class ViewCommentsButton extends React.PureComponent {
   state = {
     open: false,
   }
-  onClickButton1 = () => {
+  onClickButton = () => {
     this.setState( prevState => ({
       open: !prevState.open,
     }) )
@@ -20,7 +20,7 @@ class ViewCommentsButton extends React.PureComponent {
 
     return (
       <>
-        <button onClick={ this.onClickButton1 } className={button.page}>
+        <button onClick={ this.onClickButton } className={button.page}>
           { this.state.open ? 'hide comments' : 'show comments' }
         </button>
         { this.state.open
