@@ -7,6 +7,7 @@ import ViewCommentsButton from '../ViewCommentsBtn'
 import CreatePostBtn from '../CreatePostBtn'
 
 import blog from './style.module.css'
+import SearchPostBar from '../SearchPostBar'
 
 class Posts extends React.PureComponent {
 
@@ -82,26 +83,24 @@ class Posts extends React.PureComponent {
       return <p>Loading…</p>
     }
     return (
-      <section className={blog.container}>
-        <div className={blog.header}>
-          <h1 className={blog.logo}>Blog</h1>
+      <section className={ blog.container }>
+        <div className={ blog.header }>
+          <h1 className={ blog.logo }>Blog</h1>
           <CreatePostBtn/>
         </div>
-        <div className={blog.sorting}>
-          <button className={blog.sorting__item}>По алфавиту</button>
-          <button className={blog.sorting__item}>По лайкам</button>
-          <button className={blog.sorting__item}>По дизлайкам</button>
-          <button className={blog.sorting__item}>Сбросить сортировку</button>
+        <div className={ blog.sorting }>
+          <button className={ blog.sorting__item }>По алфавиту</button>
+          <button className={ blog.sorting__item }>По лайкам</button>
+          <button className={ blog.sorting__item }>По дизлайкам</button>
+          <button className={ blog.sorting__item }>Сбросить сортировку</button>
         </div>
-        <div>
-          <input placeholder="Искать" className={blog.search}/>
-        </div>
-          <ul>
-            { renderPosts }
-          </ul>
-          <ul>
-            { renderPagesAmount }
-          </ul>
+        <SearchPostBar/>
+        <ul>
+          { renderPosts }
+        </ul>
+        <ul>
+          { renderPagesAmount }
+        </ul>
       </section>
     )
   }
@@ -109,7 +108,7 @@ class Posts extends React.PureComponent {
 
 const mapStateToProps = ( state ) => {
   return {
-    posts: state.posts,
+    posts: state.posts.filter( post => post.title.includes( state.filterPosts ) || post.body.includes( state.filterPosts ) ),
     hasErrored: state.postsHasErrored,
     isLoading: state.postsIsLoading,
   }
