@@ -1,16 +1,18 @@
 import { combineReducers } from 'redux';
-import { posts, postsIsLoading, postsHasError } from './posts';
-import { comments, commentsHasErrored, commentsIsLoading } from './comments';
+import { posts, postsIsLoading, failureRequestPosts } from './posts';
+import { comments, commentsIsLoading, failureRequestComments } from './comments';
 import { filterPosts } from './filterPosts'
 import { createNewPost } from './createPost'
+import { removePost } from './removePost'
 
 export default combineReducers({
   posts,
   postsIsLoading,
-  postsHasError,
+  failureRequestPosts,
   comments,
   commentsIsLoading,
-  commentsHasErrored,
+  failureRequestComments,
   filterPosts,
-  createNewPost
+  createNewPost,
+  removePost
 });

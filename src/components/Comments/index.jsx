@@ -7,7 +7,7 @@ class Comments extends PureComponent {
 
   static propTypes = {
     comments: PropTypes.array.isRequired, //проверить все ли пропсы+подчеркивание
-    hasErrored: PropTypes.bool.isRequired,
+    failureRequest: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
   }
 
@@ -17,13 +17,13 @@ class Comments extends PureComponent {
 
   render() {
     const {
-      hasErrored,
+      failureRequest,
       isLoading,
       comments,
       commentId,
     } = this.props
 
-    if ( hasErrored ) {
+    if ( failureRequest ) {
       return <p>Sorry! There was an error loading the items</p>
     }
 
@@ -51,7 +51,7 @@ class Comments extends PureComponent {
 const mapStateToProps = ( state ) => {
   return {
     comments: state.comments,
-    hasErrored: state.commentsHasErrored,
+    failureRequest: state.failureRequestComments,
     isLoading: state.commentsIsLoading,
   }
 }

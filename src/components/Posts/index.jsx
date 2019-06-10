@@ -6,6 +6,7 @@ import { postsFetchData } from '../../actions/postsFetch'
 import ViewCommentsButton from '../ViewCommentsBtn'
 import CreatePostBtn from '../CreatePostBtn'
 import SearchPostBar from '../SearchPostBar'
+import RemovePost from '../RemovePost'
 
 import blog from './style.module.css'
 
@@ -13,7 +14,7 @@ class Posts extends React.PureComponent {
 
   static propTypes = {
     posts: PropTypes.array.isRequired, //проверить все ли пропсы+подчеркивание
-    hasErrored: PropTypes.bool.isRequired,
+    failureRequest: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
   }
 
@@ -21,9 +22,6 @@ class Posts extends React.PureComponent {
     this.props.fetchData( 'https://jsonplaceholder.typicode.com/posts' )
   }
 
-  state = {
-    news: [],
-  }
 
   // state = {
   //   posts: this.props.posts,
@@ -39,9 +37,10 @@ class Posts extends React.PureComponent {
 
   render() {
     const {
-      hasErrored,
+      failureRequest,
       isLoading,
       posts,
+      newPosts
     } = this.props
     // const {
     //   currentPage,
@@ -78,7 +77,7 @@ class Posts extends React.PureComponent {
     //     </button>
     //   )
     // } )
-    if ( hasErrored ) {
+    if ( failureRequest ) {
       return <p>Sorry! There was an error loading the items</p>
     }
     if ( isLoading ) {
@@ -98,7 +97,7 @@ class Posts extends React.PureComponent {
         </div>
         <SearchPostBar/>
         <ul>
-          { this.props.newPosts.createdPosts.map( ( newPost ) => (
+          { newPosts.createdPosts.map( ( newPost ) => (
             <li key={ newPost.id }>
               <h2>{ newPost.title }</h2>
               <p>{ newPost.body }</p>
@@ -113,6 +112,7 @@ class Posts extends React.PureComponent {
                 <p>{ post.body }</p>
               </Link>
               <ViewCommentsButton commentId={ post.id }/>
+              <RemovePost removeId = { post.id }/>
             </li>
           ) ) }
         </ul>
@@ -121,12 +121,16 @@ class Posts extends React.PureComponent {
   }
 }
 
+
 const mapStateToProps = ( state ) => {
   return {
     posts: state.posts.filter( post => post.title.includes( state.filterPosts ) ),
-    hasErrored: state.postsHasError,
-    isLoading: state.postsIsLoading,
+    // posts: state.posts,
+    // hasErrored: state.posts,
+    // isLoading: state.posts,
     newPosts: state.createNewPost,
+    failureRequest: state.failureRequestPosts,
+    isLoading: state.postsIsLoading
   }
 }
 

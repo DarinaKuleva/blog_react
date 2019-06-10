@@ -1,6 +1,6 @@
-export function postsHasErrored(bool) {
+export function failureRequestPosts(bool) {
   return {
-    type: 'POSTS_HAS_ERRORED',
+    type: 'FAILURE_REQUEST_POSTS',
     hasErrored: bool
   };
 }
@@ -33,6 +33,6 @@ export function postsFetchData(url) {
       })
       .then(response => response.json())
       .then(posts => dispatch(postsFetchDataSuccess(posts)))
-      .catch(() => dispatch(postsHasErrored(true)));
+      .catch(() => dispatch(failureRequestPosts(true)));
   };
 }

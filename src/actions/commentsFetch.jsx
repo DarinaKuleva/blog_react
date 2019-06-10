@@ -1,14 +1,14 @@
-export function commentsHasErrored(bool) {
+export function failureRequestComments(bool) {
   return {
-    type: 'COMMENTS_HAS_ERRORED',
-    error: bool
+    type: 'FAILURE_REQUEST_COMMENTS',
+    hasErrored: bool
   };
 }
 
 export function commentsIsLoading(bool) {
   return {
     type: 'COMMENTS_IS_LOADING',
-    loading: bool
+    isLoading: bool
   };
 }
 
@@ -33,8 +33,8 @@ export function commentsFetchData(url) {
 
         return response;
       })
-      .then(response => response.json())
-      .then(posts => dispatch(commentsFetchDataSuccess(posts)))
-      .catch(() => dispatch(commentsHasErrored(true)));
+      .then((response) => response.json())
+      .then((posts) => dispatch(commentsFetchDataSuccess(posts)))
+      .catch(() => dispatch(failureRequestComments(true)));
   };
 }
