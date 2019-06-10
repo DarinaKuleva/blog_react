@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { postsFetchData } from '../../actions/postsFetch'
+import { postsFetchData } from '../../fetch/fetchPost'
 import ViewCommentsButton from '../ViewCommentsBtn'
 import CreatePostBtn from '../CreatePostBtn'
 import SearchPostBar from '../SearchPostBar'
@@ -11,7 +11,6 @@ import RemovePost from '../RemovePost'
 import blog from './style.module.css'
 
 class Posts extends React.PureComponent {
-
   static propTypes = {
     posts: PropTypes.array.isRequired, //проверить все ли пропсы+подчеркивание
     failureRequest: PropTypes.bool.isRequired,
@@ -19,7 +18,9 @@ class Posts extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.props.fetchData( 'https://jsonplaceholder.typicode.com/posts' )
+    if (this.props.posts.length === 0) {
+      this.props.fetchData()
+    }
   }
 
 
@@ -39,8 +40,7 @@ class Posts extends React.PureComponent {
     const {
       failureRequest,
       isLoading,
-      posts,
-      newPosts
+      posts
     } = this.props
     // const {
     //   currentPage,
@@ -77,67 +77,54 @@ class Posts extends React.PureComponent {
     //     </button>
     //   )
     // } )
-    if ( failureRequest ) {
+    if (failureRequest) {
       return <p>Sorry! There was an error loading the items</p>
     }
-    if ( isLoading ) {
+    if (isLoading) {
       return <p>Loading…</p>
     }
     return (
-      <section className={ blog.container }>
-        <div className={ blog.header }>
-          <h1 className={ blog.logo }>Blog</h1>
+      <section className={blog.container}>
+        <div className={blog.header}>
+          <h1 className={blog.logo}>Blog</h1>
           <CreatePostBtn/>
         </div>
-        <div className={ blog.sorting }>
-          <button className={ blog.sorting__item }>По алфавиту</button>
-          <button className={ blog.sorting__item }>По лайкам</button>
-          <button className={ blog.sorting__item }>По дизлайкам</button>
-          <button className={ blog.sorting__item }>Сбросить сортировку</button>
+        <div className={blog.sorting}>
+          <button className={blog.sorting__item}>По алфавиту</button>
+          <button className={blog.sorting__item}>По лайкам</button>
+          <button className={blog.sorting__item}>По дизлайкам</button>
+          <button className={blog.sorting__item}>Сбросить сортировку</button>
         </div>
         <SearchPostBar/>
         <ul>
-          { newPosts.createdPosts.map( ( newPost ) => (
-            <li key={ newPost.id }>
-              <h2>{ newPost.title }</h2>
-              <p>{ newPost.body }</p>
-            </li>
-          ) ) }
-        </ul>
-        <ul>
-          { posts.map( ( post ) => (
-            <li key={ post.id }>
-              <Link to={ `post-information/${ post.id }` }>
-                <h2>{ post.title }</h2>
-                <p>{ post.body }</p>
+          {posts.map((post) => (
+            <li key={post.id}>
+              <Link to={`post-information/${post.id}`}>
+                <h2>{post.title}</h2>
+                <p>{post.body}</p>
               </Link>
-              <ViewCommentsButton commentId={ post.id }/>
-              <RemovePost removeId = { post.id }/>
+              <ViewCommentsButton commentId={post.id}/>
+              <RemovePost removeId={post.id}/>
             </li>
-          ) ) }
+          ))}
         </ul>
       </section>
     )
   }
 }
 
-
-const mapStateToProps = ( state ) => {
+const mapStateToProps = (state) => {
   return {
-    posts: state.posts.filter( post => post.title.includes( state.filterPosts ) ),
-    // posts: state.posts,
-    // hasErrored: state.posts,
-    // isLoading: state.posts,
-    newPosts: state.createNewPost,
-    failureRequest: state.failureRequestPosts,
-    isLoading: state.postsIsLoading
+    posts: state.posts.data.filter(post => post.title.includes(state.filterPosts)),
+    failureRequest: state.posts.error,
+    isLoading: state.posts.loading
   }
 }
 
-const mapDispatchToProps = ( dispatch ) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: ( url ) => dispatch( postsFetchData( url ) ),
+    fetchData: (url) => dispatch(postsFetchData(url)),
   }
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( Posts )
+export default connect(mapStateToProps, mapDispatchToProps)(Posts)

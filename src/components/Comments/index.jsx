@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { commentsFetchData } from '../../actions/commentsFetch'
+import { commentsFetchData } from '../../fetch/fetchComments'
 
 class Comments extends PureComponent {
 
@@ -12,7 +12,7 @@ class Comments extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.fetchData( 'https://jsonplaceholder.typicode.com/comments' )
+    this.props.fetchData( )
   }
 
   render() {
@@ -50,9 +50,9 @@ class Comments extends PureComponent {
 
 const mapStateToProps = ( state ) => {
   return {
-    comments: state.comments,
-    failureRequest: state.failureRequestComments,
-    isLoading: state.commentsIsLoading,
+    comments: state.comments.data,
+    failureRequest: state.comments.error,
+    isLoading: state.comments.loading,
   }
 }
 

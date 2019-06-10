@@ -1,53 +1,40 @@
-// const initialState = {
-//   hasErrored: false,
-//   isLoading: false,
-//   data: [
-//     {
-//       id: 3333,
-//       title: 'fvdv',
-//       body: 'fdvdf'
-//     }
-//   ]
-// }
-//
-// export function posts(state = initialState, action) {
-//   switch (action.type) {
-//     case 'POSTS_HAS_ERRORED':
-//       return action.hasErrored;
-//     case 'POSTS_IS_LOADING':
-//       return action.isLoading;
-//     case 'POSTS_FETCH_DATA_SUCCESS':
-//       return action.posts;
-//
-//     default:
-//       return state;
-//   }
-// }
+const initialState = {
+  error: false,
+  loading: false,
+  data: []
+}
 
-export function failureRequestPosts(state = false, action) {
+export function posts(state = initialState, action) {
   switch (action.type) {
     case 'FAILURE_REQUEST_POSTS':
-      return action.hasErrored;
-
-    default:
-      return state;
-  }
-}
-
-export function postsIsLoading(state = false, action) {
-  switch (action.type) {
+      return {
+        ...state,
+        error: true,
+        loading: false
+      } ;
     case 'POSTS_IS_LOADING':
-      return action.isLoading;
-
-    default:
-      return state;
-  }
-}
-
-export function posts(state = [], action) {
-  switch (action.type) {
+      return {
+        ...state,
+        loading: true
+      } ;
     case 'POSTS_FETCH_DATA_SUCCESS':
-      return action.posts;
+      return {
+        ...state,
+        error: false,
+        loading: false,
+        data: action.posts
+      } ;
+    case 'ADD_NEW_POST':
+      const newPost = {
+        title: action.title,
+        body: action.body,
+        id: 5565855
+      };
+      return {
+        error: false,
+        loading: false,
+        data: [newPost, ...state.data]
+      };
 
     default:
       return state;

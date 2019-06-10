@@ -15,7 +15,7 @@ class RemovePost extends React.PureComponent {
     )
   }
   removePost = (id) => {
-    this.props.deletePost( id )
+    // this.props.deletePost( id )
   }
 }
 
