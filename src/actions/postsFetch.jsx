@@ -28,13 +28,11 @@ export function postsFetchData(url) {
         if (!response.ok) {
           throw Error(response.statusText);
         }
-
         dispatch(postsIsLoading(false));
-
         return response;
       })
-      .then((response) => response.json())
-      .then((posts) => dispatch(postsFetchDataSuccess(posts)))
+      .then(response => response.json())
+      .then(posts => dispatch(postsFetchDataSuccess(posts)))
       .catch(() => dispatch(postsHasErrored(true)));
   };
 }

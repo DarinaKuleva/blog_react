@@ -1,14 +1,14 @@
 export function commentsHasErrored(bool) {
   return {
     type: 'COMMENTS_HAS_ERRORED',
-    hasErrored: bool
+    error: bool
   };
 }
 
 export function commentsIsLoading(bool) {
   return {
     type: 'COMMENTS_IS_LOADING',
-    isLoading: bool
+    loading: bool
   };
 }
 
@@ -33,8 +33,8 @@ export function commentsFetchData(url) {
 
         return response;
       })
-      .then((response) => response.json())
-      .then((posts) => dispatch(commentsFetchDataSuccess(posts)))
+      .then(response => response.json())
+      .then(posts => dispatch(commentsFetchDataSuccess(posts)))
       .catch(() => dispatch(commentsHasErrored(true)));
   };
 }
