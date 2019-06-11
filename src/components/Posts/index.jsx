@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { postsFetchData } from '../../fetch/fetchPost'
 import ViewCommentsButton from '../ViewCommentsBtn'
-import NewPostBtn from '../NewPostBtn'
 import SearchPostBar from '../SearchPostBar'
 import RemovePost from '../RemovePost'
 import removePost from '../../actions/removePost'
@@ -99,7 +98,11 @@ class Posts extends React.PureComponent {
       <section className={blog.container}>
         <div className={blog.header}>
           <h1 className={blog.logo}>Blog</h1>
-          <NewPostBtn/>
+          <Link to={ `/create-post` }>
+            <button>
+              Create new post
+            </button>
+          </Link>
         </div>
         <div className={blog.sorting}>
           <Filter
