@@ -105,6 +105,11 @@ class Posts extends React.PureComponent {
                 <p>{post.body}</p>
               </Link>
               <RemovePost removePost={ () => this.props.removePost( post.id ) }/>
+              <Link to={ `/edit-post/${post.id}` }>
+                <button>
+                  Edit post
+                </button>
+              </Link>
               <ViewCommentsButton commentId={post.id}/>
             </li>
           ))}
