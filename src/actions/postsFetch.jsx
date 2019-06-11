@@ -1,4 +1,6 @@
-const FAILURE_REQUEST_POSTS = 'FAILURE_REQUEST_POSTS';//везде вынести в переменные!!!!
+const FAILURE_REQUEST_POSTS = 'FAILURE_REQUEST_POSTS';
+const POSTS_IS_LOADING = 'POSTS_IS_LOADING';
+const POSTS_FETCH_DATA_SUCCESS = 'POSTS_FETCH_DATA_SUCCESS'
 
 export function failureRequestPosts() {
   return {
@@ -8,13 +10,13 @@ export function failureRequestPosts() {
 
 export function postsIsLoading() {
   return {
-    type: 'POSTS_IS_LOADING'
+    type: POSTS_IS_LOADING
   };
 }
 
 export function postsFetchDataSuccess(posts) {
   return {
-    type: 'POSTS_FETCH_DATA_SUCCESS',
+    type: POSTS_FETCH_DATA_SUCCESS,
     posts
   };
 }
