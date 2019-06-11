@@ -12,6 +12,8 @@ import LikePost from '../LikePost'
 import DislikePost from '../DislikePost'
 import likePost from '../../actions/likePost'
 import dislikePost from '../../actions/dislikePost'
+import {FILTER_MODE_ALL, FILTER_MODE_LIKE, FILTER_MODE_DISLIKE } from '../../constants/index'
+import Filter from '../Filter'
 
 import blog from './style.module.css'
 
@@ -20,6 +22,10 @@ class Posts extends React.PureComponent {
     posts: PropTypes.array.isRequired, //проверить все ли пропсы+подчеркивание
     failureRequest: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
+  }
+
+  state = {
+    filter: FILTER_MODE_ALL
   }
 
   componentDidMount() {
@@ -42,11 +48,12 @@ class Posts extends React.PureComponent {
   // }
 
   render() {
-    const {
+    let {
       failureRequest,
-      isLoading,
-      posts
+      isLoading
     } = this.props
+
+    const posts = this.getTodoList()
     // const {
     //   currentPage,
     //   postsAmount,
@@ -95,10 +102,14 @@ class Posts extends React.PureComponent {
           <NewPostBtn/>
         </div>
         <div className={blog.sorting}>
-          <button className={blog.sorting__item}>По алфавиту</button>
-          <button className={blog.sorting__item}>По лайкам</button>
-          <button className={blog.sorting__item}>По дизлайкам</button>
-          <button className={blog.sorting__item}>Сбросить сортировку</button>
+          <Filter
+            filterLike={ this.filterLike }
+            filterDislike={ this.filterDislike }
+            filterAll={ this.filterAll }/>
+          {/*<button className={blog.sorting__item}>По алфавиту</button>*/}
+          {/*<button className={blog.sorting__item}>По лайкам</button>*/}
+          {/*<button className={blog.sorting__item}>По дизлайкам</button>*/}
+          {/*<button className={blog.sorting__item}>Сбросить сортировку</button>*/}
         </div>
         <SearchPostBar/>
         <ul>
@@ -122,6 +133,26 @@ class Posts extends React.PureComponent {
         </ul>
       </section>
     )
+  }
+
+  getTodoList = () => {
+    switch (this.state.filter) {
+      case FILTER_MODE_ALL:
+        return this.props.posts
+      case FILTER_MODE_LIKE:
+        return this.props.posts.filter(todoItem => todoItem.like)
+      case FILTER_MODE_DISLIKE:
+        return this.props.posts.filter(todoItem => todoItem.dislike)
+    }
+  }
+  filterAll = () => {
+    this.setState({filter: FILTER_MODE_ALL})
+  }
+  filterLike = () => {
+    this.setState({filter: FILTER_MODE_LIKE})
+  }
+  filterDislike = () => {
+    this.setState({filter: FILTER_MODE_DISLIKE})
   }
 }
 
