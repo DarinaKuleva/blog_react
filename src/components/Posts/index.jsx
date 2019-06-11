@@ -11,7 +11,7 @@ import LikePost from '../LikePost'
 import DislikePost from '../DislikePost'
 import likePost from '../../actions/likePost'
 import dislikePost from '../../actions/dislikePost'
-import {FILTER_MODE_ALL, FILTER_MODE_LIKE, FILTER_MODE_DISLIKE } from '../../constants/index'
+import {FILTER_MODE_ALL, FILTER_MODE_LIKE, FILTER_MODE_DISLIKE, FILTER_MODE_ALPH } from '../../constants/index'
 import Filter from '../Filter'
 
 import blog from './style.module.css'
@@ -108,7 +108,8 @@ class Posts extends React.PureComponent {
           <Filter
             filterLike={ this.filterLike }
             filterDislike={ this.filterDislike }
-            filterAll={ this.filterAll }/>
+            filterAll={ this.filterAll }
+            filterAlph={ this.filterAlph }/>
           {/*<button className={blog.sorting__item}>По алфавиту</button>*/}
           {/*<button className={blog.sorting__item}>По лайкам</button>*/}
           {/*<button className={blog.sorting__item}>По дизлайкам</button>*/}
@@ -146,6 +147,10 @@ class Posts extends React.PureComponent {
         return this.props.posts.filter(todoItem => todoItem.like)
       case FILTER_MODE_DISLIKE:
         return this.props.posts.filter(todoItem => todoItem.dislike)
+      case FILTER_MODE_ALPH:
+        console.log('jopa')
+        return this.props.posts.sort()
+        // return this.props.posts.filter(todoItem => todoItem.dislike)
       default:
         break;
     }
@@ -158,6 +163,9 @@ class Posts extends React.PureComponent {
   }
   filterDislike = () => {
     this.setState({filter: FILTER_MODE_DISLIKE})
+  }
+  filterAlph = () => {
+    this.setState({filter: FILTER_MODE_ALPH})
   }
 }
 
