@@ -28,7 +28,7 @@ export function posts(state = initialState, action) {
       const newPost = {
         title: action.title,
         body: action.body,
-        id: new Date(),
+        id: 9000,
       }
       return {
         error: false,
@@ -41,6 +41,17 @@ export function posts(state = initialState, action) {
         error: false,
         loading: false,
         data: state.data.filter(post => post.id !== action.payload),
+      }
+
+    case 'EDIT_POST':
+      return {
+        error: false,
+        loading: false,
+        data: state.data.map(post =>
+          parseInt(action.id, 10) === post.id
+            ? { ...post, title: action.title, body: action.body }
+            : post
+        ),
       }
 
     default:

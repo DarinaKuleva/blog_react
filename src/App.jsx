@@ -11,7 +11,7 @@ const App = () => (
       <Route exact path="/" component={PostsList}/>
       <Route path="/post-information/:postId" component={PostInformation} />
       <Route path="/create-post" component={CreateNewPost} />
-      <Route path="/edit-post" component={EditPost} />
+      <Route path="/edit-post/:postId" component={EditPost} />
     </Switch>
   </main>
 );
