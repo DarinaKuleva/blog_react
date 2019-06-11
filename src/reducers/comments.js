@@ -1,7 +1,7 @@
 const initialState = {
   error: false,
   loading: false,
-  data: []
+  data: [],
 }
 
 export function comments(state = initialState, action) {
@@ -10,20 +10,20 @@ export function comments(state = initialState, action) {
       return {
         ...state,
         error: true,
-        loading: false
-      } ;
+        loading: false,
+      }
     case 'COMMENTS_IS_LOADING':
       return {
         ...state,
-        loading: true
-      } ;
+        loading: true,
+      }
     case 'COMMENTS_FETCH_DATA_SUCCESS':
       return {
         ...state,
         error: false,
         loading: false,
-        data: action.comments
-      } ;
+        data: action.comments,
+      }
     // case 'ADD_NEW_COMMENT':
     //   const newPost = {
     //     title: action.title,
@@ -37,6 +37,6 @@ export function comments(state = initialState, action) {
     //   };
 
     default:
-      return state;
+      return state
   }
 }

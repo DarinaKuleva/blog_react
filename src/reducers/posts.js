@@ -1,7 +1,7 @@
 const initialState = {
   error: false,
   loading: false,
-  data: []
+  data: [],
 }
 
 export function posts(state = initialState, action) {
@@ -10,33 +10,33 @@ export function posts(state = initialState, action) {
       return {
         ...state,
         error: true,
-        loading: false
-      } ;
+        loading: false,
+      }
     case 'POSTS_IS_LOADING':
       return {
         ...state,
-        loading: true
-      } ;
+        loading: true,
+      }
     case 'POSTS_FETCH_DATA_SUCCESS':
       return {
         ...state,
         error: false,
         loading: false,
-        data: action.posts
-      } ;
+        data: action.posts,
+      }
     case 'ADD_NEW_POST':
       const newPost = {
         title: action.title,
         body: action.body,
-        id: 5565855
-      };
+        id: 5565855,
+      }
       return {
         error: false,
         loading: false,
-        data: [newPost, ...state.data]
-      };
+        data: [newPost, ...state.data],
+      }
 
     default:
-      return state;
+      return state
   }
 }
