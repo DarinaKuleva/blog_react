@@ -28,12 +28,19 @@ export function posts(state = initialState, action) {
       const newPost = {
         title: action.title,
         body: action.body,
-        id: 5565855,
+        id: new Date(),
       }
       return {
         error: false,
         loading: false,
         data: [newPost, ...state.data],
+      }
+
+    case 'REMOVE_POST':
+      return {
+        error: false,
+        loading: false,
+        data: state.data.filter(post => post.id !== action.payload),
       }
 
     default:

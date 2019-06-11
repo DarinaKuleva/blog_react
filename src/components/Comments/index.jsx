@@ -36,14 +36,20 @@ class Comments extends PureComponent {
     } )
 
     return (
-      <ul>
-        { openPost.map( ( comment ) => (
-          <li key={ comment.id }>
-            <h2>{ comment.name }</h2>
-            <p>{ comment.body }</p>
-          </li>
-        ) ) }
-      </ul>
+      <div>
+        { openPost.length > 0 ?
+          <ul>
+            { openPost.map( ( comment ) => (
+              <li key={ comment.id }>
+                <h2>{ comment.name }</h2>
+                <p>{ comment.body }</p>
+              </li>
+            ) ) }
+          </ul>
+          :
+          <div>No comments(переписать)</div>
+        }
+      </div>
     )
   }
 }

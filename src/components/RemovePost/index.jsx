@@ -1,29 +1,13 @@
 import React from 'react'
-import deletePost from '../../actions/removePost'
 import { connect } from 'react-redux'
 
 class RemovePost extends React.PureComponent {
-  render() {
-    const {
-      removeId,
-    } = this.props
 
+  render() {
     return (
-      <button onClick={ this.removePost( removeId ) }>
-        дилить
-      </button>
+      <button onClick={ this.props.removePost }>DELETE</button>
     )
   }
-  removePost = (id) => {
-    // this.props.deletePost( id )
-  }
 }
 
-
-const mapDispatchToProps = ( dispatch ) => {
-  return {
-    deletePost: (id) => dispatch( deletePost( id ) ),
-  }
-}
-
-export default connect( null, mapDispatchToProps )( RemovePost )
+export default connect()( RemovePost )

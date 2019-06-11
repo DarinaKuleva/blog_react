@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { postsFetchData } from '../../fetch/fetchPost'
 import ViewCommentsButton from '../ViewCommentsBtn'
-import CreatePostBtn from '../CreatePostBtn'
+import CreatePostBtn from '../NewPostBtn'
 import SearchPostBar from '../SearchPostBar'
 import RemovePost from '../RemovePost'
+import removePost from '../../actions/removePost'
 
 import blog from './style.module.css'
 
@@ -104,7 +105,7 @@ class Posts extends React.PureComponent {
                 <p>{post.body}</p>
               </Link>
               <ViewCommentsButton commentId={post.id}/>
-              <RemovePost removeId={post.id}/>
+              <RemovePost removePost={ () => this.props.removePost( post.id ) }/>
             </li>
           ))}
         </ul>
@@ -124,6 +125,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchData: (url) => dispatch(postsFetchData(url)),
+    removePost: (id) => dispatch(removePost(id)),
   }
 }
 
