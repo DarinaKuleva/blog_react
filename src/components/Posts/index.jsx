@@ -146,6 +146,8 @@ class Posts extends React.PureComponent {
         return this.props.posts.filter(todoItem => todoItem.like)
       case FILTER_MODE_DISLIKE:
         return this.props.posts.filter(todoItem => todoItem.dislike)
+      default:
+        break;
     }
   }
   filterAll = () => {
