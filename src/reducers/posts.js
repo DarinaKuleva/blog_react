@@ -54,6 +54,28 @@ export function posts(state = initialState, action) {
         ),
       }
 
+    case 'LIKE_POST':
+      return {
+        error: false,
+        loading: false,
+        data: state.data.map(post =>
+          parseInt(action.payload, 10) === post.id
+            ? { ...post, like: true, dislike: false }
+            : post
+        ),
+      }
+
+    case 'DISLIKE_POST':
+      return {
+        error: false,
+        loading: false,
+        data: state.data.map(post =>
+          parseInt(action.payload, 10) === post.id
+            ? { ...post, like: false, dislike: true }
+            : post
+        ),
+      }
+
     default:
       return state
   }

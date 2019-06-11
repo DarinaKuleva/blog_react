@@ -8,6 +8,10 @@ import NewPostBtn from '../NewPostBtn'
 import SearchPostBar from '../SearchPostBar'
 import RemovePost from '../RemovePost'
 import removePost from '../../actions/removePost'
+import LikePost from '../LikePost'
+import DislikePost from '../DislikePost'
+import likePost from '../../actions/likePost'
+import dislikePost from '../../actions/dislikePost'
 
 import blog from './style.module.css'
 
@@ -110,6 +114,8 @@ class Posts extends React.PureComponent {
                   Edit post
                 </button>
               </Link>
+              <LikePost likePost={ () => this.props.likePost( post.id ) }/>
+              <DislikePost dislikePost={ () => this.props.dislikePost( post.id ) }/>
               <ViewCommentsButton commentId={post.id}/>
             </li>
           ))}
@@ -131,6 +137,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchData: (url) => dispatch(postsFetchData(url)),
     removePost: (id) => dispatch(removePost(id)),
+    likePost: (id) => dispatch(likePost(id)),
+    dislikePost: (id) => dispatch(dislikePost(id)),
   }
 }
 
