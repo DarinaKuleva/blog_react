@@ -8,6 +8,7 @@ import NewPostBtn from '../NewPostBtn'
 import SearchPostBar from '../SearchPostBar'
 import RemovePost from '../RemovePost'
 import removePost from '../../actions/removePost'
+import EditPostBtn from '../EditPostBtn'
 
 import blog from './style.module.css'
 
@@ -105,6 +106,7 @@ class Posts extends React.PureComponent {
                 <p>{post.body}</p>
               </Link>
               <RemovePost removePost={ () => this.props.removePost( post.id ) }/>
+              <EditPostBtn/>
               <ViewCommentsButton commentId={post.id}/>
             </li>
           ))}
