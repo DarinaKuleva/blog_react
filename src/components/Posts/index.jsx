@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { postsFetchData } from '../../fetch/fetchPost'
 import ViewCommentsButton from '../ViewCommentsBtn'
-import CreatePostBtn from '../NewPostBtn'
+import NewPostBtn from '../NewPostBtn'
 import SearchPostBar from '../SearchPostBar'
 import RemovePost from '../RemovePost'
 import removePost from '../../actions/removePost'
@@ -88,7 +88,7 @@ class Posts extends React.PureComponent {
       <section className={blog.container}>
         <div className={blog.header}>
           <h1 className={blog.logo}>Blog</h1>
-          <CreatePostBtn/>
+          <NewPostBtn/>
         </div>
         <div className={blog.sorting}>
           <button className={blog.sorting__item}>По алфавиту</button>
@@ -104,8 +104,8 @@ class Posts extends React.PureComponent {
                 <h2>{post.title}</h2>
                 <p>{post.body}</p>
               </Link>
-              <ViewCommentsButton commentId={post.id}/>
               <RemovePost removePost={ () => this.props.removePost( post.id ) }/>
+              <ViewCommentsButton commentId={post.id}/>
             </li>
           ))}
         </ul>

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { commentsFetchData } from '../../fetch/fetchComments'
+import NewCommentBtn from '../CreateNewComment'
 
 class Comments extends PureComponent {
 
@@ -12,7 +13,9 @@ class Comments extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.fetchData( )
+    if (this.props.comments.length === 0) {
+      this.props.fetchData()
+    }
   }
 
   render() {
@@ -37,6 +40,7 @@ class Comments extends PureComponent {
 
     return (
       <div>
+        <NewCommentBtn commentId={commentId}/>
         { openPost.length > 0 ?
           <ul>
             { openPost.map( ( comment ) => (

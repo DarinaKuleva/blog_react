@@ -24,17 +24,19 @@ export function comments(state = initialState, action) {
         loading: false,
         data: action.comments,
       }
-    // case 'ADD_NEW_COMMENT':
-    //   const newPost = {
-    //     title: action.title,
-    //     body: action.body,
-    //     id: 5565666855
-    //   };
-    //   return {
-    //     error: false,
-    //     loading: false,
-    //     data: [newPost, ...state.data]
-    //   };
+    case 'ADD_NEW_COMMENT':
+      const newComment = {
+        name: action.name,
+        email: action.email,
+        body: action.body,
+        id: new Date(),
+        postId: action.postId,
+      }
+      return {
+        error: false,
+        loading: false,
+        data: [newComment, ...state.data],
+      }
 
     default:
       return state
