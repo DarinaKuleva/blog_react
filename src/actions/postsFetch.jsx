@@ -1,40 +1,22 @@
-export function postsHasErrored(bool) {
+const FAILURE_REQUEST_POSTS = 'FAILURE_REQUEST_POSTS';
+const POSTS_IS_LOADING = 'POSTS_IS_LOADING';
+const POSTS_FETCH_DATA_SUCCESS = 'POSTS_FETCH_DATA_SUCCESS'
+
+export function failureRequestPosts() {
   return {
-    type: 'POSTS_HAS_ERRORED',
-    hasErrored: bool
+    type: FAILURE_REQUEST_POSTS
   };
 }
 
-export function postsIsLoading(bool) {
+export function postsIsLoading() {
   return {
-    type: 'POSTS_IS_LOADING',
-    isLoading: bool
+    type: POSTS_IS_LOADING
   };
 }
 
 export function postsFetchDataSuccess(posts) {
   return {
-    type: 'POSTS_FETCH_DATA_SUCCESS',
+    type: POSTS_FETCH_DATA_SUCCESS,
     posts
-  };
-}
-
-export function postsFetchData(url) {
-  return (dispatch) => {
-    dispatch(postsIsLoading(true));
-
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-
-        dispatch(postsIsLoading(false));
-
-        return response;
-      })
-      .then((response) => response.json())
-      .then((posts) => dispatch(postsFetchDataSuccess(posts)))
-      .catch(() => dispatch(postsHasErrored(true)));
   };
 }

@@ -1,29 +1,29 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { commentsFetchData } from '../../actions/commentsFetch'
+import { commentsFetchData } from '../../fetch/fetchComments'
 
 class Comments extends PureComponent {
 
   static propTypes = {
     comments: PropTypes.array.isRequired, //проверить все ли пропсы+подчеркивание
-    hasErrored: PropTypes.bool.isRequired,
+    failureRequest: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
   }
 
   componentDidMount() {
-    this.props.fetchData( 'https://jsonplaceholder.typicode.com/comments' )
+    this.props.fetchData( )
   }
 
   render() {
     const {
-      hasErrored,
+      failureRequest,
       isLoading,
       comments,
       commentId,
     } = this.props
 
-    if ( hasErrored ) {
+    if ( failureRequest ) {
       return <p>Sorry! There was an error loading the items</p>
     }
 
@@ -36,23 +36,29 @@ class Comments extends PureComponent {
     } )
 
     return (
-      <ul>
-        { openPost.map( ( comment ) => (
-          <li key={ comment.id }>
-            <h2>{ comment.name }</h2>
-            <p>{ comment.body }</p>
-          </li>
-        ) ) }
-      </ul>
+      <div>
+        { openPost.length > 0 ?
+          <ul>
+            { openPost.map( ( comment ) => (
+              <li key={ comment.id }>
+                <h2>{ comment.name }</h2>
+                <p>{ comment.body }</p>
+              </li>
+            ) ) }
+          </ul>
+          :
+          <div>No comments(переписать)</div>
+        }
+      </div>
     )
   }
 }
 
 const mapStateToProps = ( state ) => {
   return {
-    comments: state.comments,
-    hasErrored: state.commentsHasErrored,
-    isLoading: state.commentsIsLoading,
+    comments: state.comments.data,
+    failureRequest: state.comments.error,
+    isLoading: state.comments.loading,
   }
 }
 

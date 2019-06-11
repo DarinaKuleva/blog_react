@@ -1,40 +1,23 @@
-export function commentsHasErrored(bool) {
+const FAILURE_REQUEST_COMMENTS = 'FAILURE_REQUEST_COMMENTS';
+const COMMENTS_IS_LOADING = 'COMMENTS_IS_LOADING';
+const COMMENTS_FETCH_DATA_SUCCESS = 'COMMENTS_FETCH_DATA_SUCCESS';
+
+export function failureRequestComments(bool) {
   return {
-    type: 'COMMENTS_HAS_ERRORED',
+    type: FAILURE_REQUEST_COMMENTS,
     hasErrored: bool
   };
 }
 
-export function commentsIsLoading(bool) {
+export function commentsIsLoading() {
   return {
-    type: 'COMMENTS_IS_LOADING',
-    isLoading: bool
+    type: COMMENTS_IS_LOADING
   };
 }
 
 export function commentsFetchDataSuccess(comments) {
   return {
-    type: 'COMMENTS_FETCH_DATA_SUCCESS',
+    type: COMMENTS_FETCH_DATA_SUCCESS,
     comments
-  };
-}
-
-export function commentsFetchData(url) {
-  return (dispatch) => {
-    dispatch(commentsIsLoading(true));
-
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-
-        dispatch(commentsIsLoading(false));
-
-        return response;
-      })
-      .then((response) => response.json())
-      .then((posts) => dispatch(commentsFetchDataSuccess(posts)))
-      .catch(() => dispatch(commentsHasErrored(true)));
   };
 }

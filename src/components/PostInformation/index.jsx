@@ -39,7 +39,7 @@ class PostInformation extends React.PureComponent {
 }
 function mapStateToProps( state ) {
   return {
-    posts: state.posts
+    posts: state.posts.data
   }
 }
 export default connect( mapStateToProps )( PostInformation )

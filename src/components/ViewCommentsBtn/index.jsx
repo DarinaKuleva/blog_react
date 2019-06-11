@@ -1,7 +1,7 @@
 import React from 'react'
 import Comments from '../Comments'
 
-import button from '../CreatePostBtn/style.module.css'
+import button from '../NewPostBtn/style.module.css'
 
 class ViewCommentsButton extends React.PureComponent {
   state = {
