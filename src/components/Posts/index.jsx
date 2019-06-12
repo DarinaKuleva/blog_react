@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { postsFetchData } from '../../fetch/fetchPost'
 import ViewCommentsButton from '../ViewCommentsBtn'
-import NewPostBtn from '../NewPostBtn'
 import SearchPostBar from '../SearchPostBar'
 import RemovePost from '../RemovePost'
 import removePost from '../../actions/removePost'
@@ -12,7 +11,7 @@ import LikePost from '../LikePost'
 import DislikePost from '../DislikePost'
 import likePost from '../../actions/likePost'
 import dislikePost from '../../actions/dislikePost'
-import {FILTER_MODE_ALL, FILTER_MODE_LIKE, FILTER_MODE_DISLIKE } from '../../constants/index'
+import {FILTER_MODE_ALL, FILTER_MODE_LIKE, FILTER_MODE_DISLIKE, FILTER_MODE_ALPHABET, FILTER_MODE_RESET } from '../../constants/index'
 import Filter from '../Filter'
 
 import blog from './style.module.css'
@@ -99,13 +98,19 @@ class Posts extends React.PureComponent {
       <section className={blog.container}>
         <div className={blog.header}>
           <h1 className={blog.logo}>Blog</h1>
-          <NewPostBtn/>
+          <Link to={ `/create-post` }>
+            <button>
+              Create new post
+            </button>
+          </Link>
         </div>
         <div className={blog.sorting}>
           <Filter
             filterLike={ this.filterLike }
             filterDislike={ this.filterDislike }
-            filterAll={ this.filterAll }/>
+            filterAll={ this.filterAll }
+            filterAlphabet={ this.filterAlphabet }
+            filterReset={ this.filterReset }/>
           {/*<button className={blog.sorting__item}>По алфавиту</button>*/}
           {/*<button className={blog.sorting__item}>По лайкам</button>*/}
           {/*<button className={blog.sorting__item}>По дизлайкам</button>*/}
@@ -143,6 +148,22 @@ class Posts extends React.PureComponent {
         return this.props.posts.filter(todoItem => todoItem.like)
       case FILTER_MODE_DISLIKE:
         return this.props.posts.filter(todoItem => todoItem.dislike)
+      case FILTER_MODE_ALPHABET:
+        return this.props.posts.sort(function(a, b){
+          var titleA=a.title.toLowerCase(), titleB=b.title.toLowerCase()
+          if (titleA < titleB)
+            return -1
+          if (titleA > titleB)
+            return 1
+          return 0
+        })
+      case FILTER_MODE_RESET:
+        return this.props.posts.sort(function(a, b){
+          var idA=a.id, idB=b.id
+          return idA-idB
+        })
+      default:
+        break;
     }
   }
   filterAll = () => {
@@ -153,6 +174,12 @@ class Posts extends React.PureComponent {
   }
   filterDislike = () => {
     this.setState({filter: FILTER_MODE_DISLIKE})
+  }
+  filterAlphabet = () => {
+    this.setState({filter: FILTER_MODE_ALPHABET})
+  }
+  filterReset = () => {
+    this.setState({filter: FILTER_MODE_RESET})
   }
 }
 

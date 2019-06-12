@@ -29,7 +29,7 @@ export function comments(state = initialState, action) {
         name: action.name,
         email: action.email,
         body: action.body,
-        id: 10001,
+        id: state.data.length + 1,
         postId: action.postId,
       }
       return {
