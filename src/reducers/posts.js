@@ -28,7 +28,7 @@ export function posts(state = initialState, action) {
       const newPost = {
         title: action.title,
         body: action.body,
-        id: state.data.length + 1,
+        id: state.data[0].id - 1,
       }
       return {
         error: false,

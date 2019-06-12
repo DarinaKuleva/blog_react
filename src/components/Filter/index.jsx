@@ -1,7 +1,7 @@
 import React from 'react'
 import blog from '../Posts/style.module.css'
 
-const Filter = ( { filterLike, filterDislike, filterAll, filterAlph } ) => {
+const Filter = ( { filterLike, filterDislike, filterAll, filterAlphabet, filterReset } ) => {
   return (
     <>
       <button
@@ -20,9 +20,14 @@ const Filter = ( { filterLike, filterDislike, filterAll, filterAlph } ) => {
         ALL
       </button>
       <button
-        onClick={ filterAlph }
+        onClick={ filterAlphabet }
         className={blog.sorting__item}>
-        ALPH
+        ALPHABET
+      </button>
+      <button
+        onClick={ filterReset }
+        className={blog.sorting__item}>
+        RESET
       </button>
     </>
   )
