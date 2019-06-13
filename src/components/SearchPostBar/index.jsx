@@ -3,8 +3,14 @@ import React from 'react'
 import blog from '../Posts/style.module.css'
 import findPost from '../../actions/findPost'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 class SearchPostBar extends React.PureComponent {
+
+  static propTypes = {
+    findPost: PropTypes.func.isRequired
+  }
+
   startSearch = () => {
     this.props.findPost( this.searchInput.value )
   }

@@ -1,6 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 class RemovePost extends React.PureComponent {
+
+  static propTypes = {
+    removePost: PropTypes.func.isRequired
+  }
 
   render() {
     return (

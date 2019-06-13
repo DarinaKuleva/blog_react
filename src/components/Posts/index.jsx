@@ -40,7 +40,7 @@ class Posts extends React.PureComponent {
     } = this.props
 
     const posts = this.getTodoList()
-   
+
     if ( failureRequest ) {
       return <p>Sorry! There was an error loading the items</p>
     }

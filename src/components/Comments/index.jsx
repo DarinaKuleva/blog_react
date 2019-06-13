@@ -7,9 +7,10 @@ import NewCommentBtn from '../CreateNewComment'
 class Comments extends PureComponent {
 
   static propTypes = {
-    comments: PropTypes.array.isRequired, //проверить все ли пропсы+подчеркивание
+    comments: PropTypes.array.isRequired,
     failureRequest: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
+    fetchData: PropTypes.func.isRequired
   }
 
   componentDidMount() {
