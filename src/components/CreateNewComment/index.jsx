@@ -31,7 +31,7 @@ class CreateNewComment extends React.PureComponent {
                      name="commentName"
                      placeholder="Title..."
                      type="text"
-                     value={ this.setState.commentName }
+                     value={ this.state.commentName }
                      onChange={ this.handleCommentInput }
                      required/>
             </div>
@@ -41,7 +41,7 @@ class CreateNewComment extends React.PureComponent {
                      name="userEmail"
                      placeholder="Email..."
                      type="email"
-                     value={ this.setState.userEmail }
+                     value={ this.state.userEmail }
                      onChange={ this.handleCommentInput }
                      required/>
             </div>
@@ -50,7 +50,7 @@ class CreateNewComment extends React.PureComponent {
               <textarea id="commentBody"
                         name="commentBody"
                         placeholder="Comment..."
-                        value={ this.setState.commentBody }
+                        value={ this.state.commentBody }
                         onChange={ this.handleCommentInput }
                         required/>
             </div>

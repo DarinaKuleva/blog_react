@@ -18,7 +18,7 @@ import blog from './style.module.css'
 
 class Posts extends React.PureComponent {
   static propTypes = {
-    posts: PropTypes.array.isRequired, //проверить все ли пропсы+подчеркивание
+    posts: PropTypes.array.isRequired,
     failureRequest: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
   }
@@ -28,7 +28,7 @@ class Posts extends React.PureComponent {
   }
 
   componentDidMount() {
-    if (this.props.posts.length === 0) {
+    if ( this.props.posts.length === 0 ) {
       this.props.fetchData()
     }
   }
@@ -88,84 +88,82 @@ class Posts extends React.PureComponent {
     //     </button>
     //   )
     // } )
-    if (failureRequest) {
+    if ( failureRequest ) {
       return <p>Sorry! There was an error loading the items</p>
     }
-    if (isLoading) {
+    if ( isLoading ) {
       return <p>Loading…</p>
     }
     return (
-      <section className={blog.container}>
-        <div className={blog.header}>
-          <h1 className={blog.logo}>Blog</h1>
+      <section className={ blog.container }>
+        <div className={ blog.header }>
+          <h1 className={ blog.logo }>Blog</h1>
           <Link to={ `/create-post` }>
             <button>
               Create new post
             </button>
           </Link>
         </div>
-        <div className={blog.sorting}>
+        <div className={ blog.sorting }>
           <Filter
             filterLike={ this.filterLike }
             filterDislike={ this.filterDislike }
             filterAll={ this.filterAll }
             filterAlphabet={ this.filterAlphabet }
             filterReset={ this.filterReset }/>
-          {/*<button className={blog.sorting__item}>По алфавиту</button>*/}
-          {/*<button className={blog.sorting__item}>По лайкам</button>*/}
-          {/*<button className={blog.sorting__item}>По дизлайкам</button>*/}
-          {/*<button className={blog.sorting__item}>Сбросить сортировку</button>*/}
+          {/*<button className={blog.sorting__item}>По алфавиту</button>*/ }
         </div>
         <SearchPostBar/>
         <ul>
-          {posts.map((post) => (
-            <li key={post.id}>
-              <Link to={`post-information/${post.id}`}>
-                <h2>{post.title}</h2>
-                <p>{post.body}</p>
+          { posts.map( ( post ) => (
+            <li key={ post.id }>
+              <Link to={ `post-information/${ post.id }` }>
+                <h2>{ post.title }</h2>
+                <p>{ post.body }</p>
               </Link>
               <RemovePost removePost={ () => this.props.removePost( post.id ) }/>
-              <Link to={ `/edit-post/${post.id}` }>
+              <Link to={ `/edit-post/${ post.id }` }>
                 <button>
                   Edit post
                 </button>
               </Link>
               <LikePost likePost={ () => this.props.likePost( post.id ) }/>
               <DislikePost dislikePost={ () => this.props.dislikePost( post.id ) }/>
-              <ViewCommentsButton commentId={post.id}/>
+              <ViewCommentsButton commentId={ post.id }/>
             </li>
-          ))}
+          ) ) }
         </ul>
       </section>
     )
   }
 
   getTodoList = () => {
-    switch (this.state.filter) {
+    switch ( this.state.filter ) {
       case FILTER_MODE_ALL:
         return this.props.posts
       case FILTER_MODE_LIKE:
-        return this.props.posts.filter(todoItem => todoItem.like)
+        return this.props.posts.filter( todoItem => todoItem.like )
       case FILTER_MODE_DISLIKE:
-        return this.props.posts.filter(todoItem => todoItem.dislike)
+        return this.props.posts.filter( todoItem => todoItem.dislike )
       case FILTER_MODE_ALPHABET:
-        return this.props.posts.sort(function(a, b){
-          var titleA=a.title.toLowerCase(), titleB=b.title.toLowerCase()
-          if (titleA < titleB)
+        return this.props.posts.sort( function( a, b ) {
+          var titleA = a.title.toLowerCase(), titleB = b.title.toLowerCase()
+          if ( titleA < titleB )
             return -1
-          if (titleA > titleB)
+          if ( titleA > titleB )
             return 1
           return 0
-        })
+        } )
       case FILTER_MODE_RESET:
-        return this.props.posts.sort(function(a, b){
-          var idA=a.id, idB=b.id
-          return idA-idB
-        })
+        return this.props.posts.sort( function( a, b ) {
+          var idA = a.id, idB = b.id
+          return idA - idB
+        } )
       default:
         break;
     }
   }
+
   filterAll = () => {
     this.setState({filter: FILTER_MODE_ALL})
   }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 class DislikePost extends React.PureComponent {
 
@@ -10,4 +9,4 @@ class DislikePost extends React.PureComponent {
   }
 }
 
-export default connect()( DislikePost )
+export default DislikePost

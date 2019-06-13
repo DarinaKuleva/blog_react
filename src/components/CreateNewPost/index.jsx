@@ -25,7 +25,7 @@ class CreateNewPost extends React.PureComponent {
                    name="postTitle"
                    placeholder="Title..."
                    type="text"
-                   value={ this.setState.postTitle }
+                   value={ this.state.postTitle }
                    onChange={ this.handlePostInput }
                    required/>
           </div>
@@ -34,7 +34,7 @@ class CreateNewPost extends React.PureComponent {
             <textarea id="postBody"
                       name="postBody"
                       placeholder="Post..."
-                      value={ this.setState.postBody }
+                      value={ this.state.postBody }
                       onChange={ this.handlePostInput }/>
           </div>
           <Link to="/">

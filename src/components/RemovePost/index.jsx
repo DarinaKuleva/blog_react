@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 class RemovePost extends React.PureComponent {
 
@@ -10,4 +9,4 @@ class RemovePost extends React.PureComponent {
   }
 }
 
-export default connect()( RemovePost )
+export default RemovePost
