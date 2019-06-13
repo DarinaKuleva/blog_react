@@ -2,8 +2,16 @@ import React from 'react'
 import addNewComment from '../../actions/addNewComment'
 import { connect } from 'react-redux'
 import FormErrors from '../FormError'
+import PropTypes from 'prop-types'
 
 class CreateNewComment extends React.PureComponent {
+
+  static propTypes = {
+    addNewComment: PropTypes.func.isRequired,
+    validateForm: PropTypes.func,
+    postId: PropTypes.number.isRequired
+  }
+
   state = {
     open: false,
     userEmail: '',

@@ -1,14 +1,15 @@
 import React from 'react'
 import Comments from '../Comments'
+import PropTypes from 'prop-types'
 
 class ViewCommentsButton extends React.PureComponent {
+
+  static propTypes = {
+    commentId: PropTypes.number.isRequired,
+  }
+
   state = {
     open: false,
-  }
-  onClickButton = () => {
-    this.setState( prevState => ({
-      open: !prevState.open,
-    }) )
   }
 
   render() {
@@ -18,7 +19,7 @@ class ViewCommentsButton extends React.PureComponent {
 
     return (
       <>
-        <button onClick={ this.onClickButton }>
+        <button onClick={ this.viewComments }>
           { this.state.open ? 'hide comments' : 'show comments' }
         </button>
         { this.state.open
@@ -27,6 +28,12 @@ class ViewCommentsButton extends React.PureComponent {
         }
       </>
     )
+  }
+
+  viewComments = () => {
+    this.setState( prevState => ({
+      open: !prevState.open,
+    }) )
   }
 }
 

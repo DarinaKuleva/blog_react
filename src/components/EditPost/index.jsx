@@ -3,8 +3,15 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import editPost from '../../actions/editPost'
 import FormErrors from '../FormError'
+import PropTypes from 'prop-types'
 
 class EditPost extends React.PureComponent {
+
+  static propTypes = {
+    editPost: PropTypes.func.isRequired,
+    validateForm: PropTypes.func,
+  }
+
   state = {
     postTitle: '',
     postBody: '',

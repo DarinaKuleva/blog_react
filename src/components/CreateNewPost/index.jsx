@@ -3,8 +3,14 @@ import { connect } from 'react-redux'
 import addNewPost from '../../actions/addNewPost'
 import { Link } from 'react-router-dom'
 import FormErrors from '../FormError'
+import PropTypes from 'prop-types'
 
 class CreateNewPost extends React.PureComponent {
+
+  static propTypes = {
+    addNewPost: PropTypes.func.isRequired,
+    validateForm: PropTypes.func,
+  }
 
   state = {
     postTitle: '',
