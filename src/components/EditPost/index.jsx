@@ -2,18 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import editPost from '../../actions/editPost'
+import FormErrors from '../FormError'
 
 class EditPost extends React.PureComponent {
   state = {
-    title: '',
-    body: ''
-  }
-
-  onClickButton = () => {
-      const commentTitle = this.state.title
-      const commentBody = this.state.body
-      const postId = this.props.match.params.postId
-      this.props.editPost( commentTitle, commentBody, postId)
+    postTitle: '',
+    postBody: '',
+    formErrors: { postTitle: '', postBody: '' },
+    postTitleValid: false,
+    postBodyValid: false,
+    formValid: false,
   }
 
   render() {
@@ -21,7 +19,7 @@ class EditPost extends React.PureComponent {
       posts,
       match: {
         params: {
-          postId
+          postId,
         },
       },
     } = this.props
@@ -31,50 +29,100 @@ class EditPost extends React.PureComponent {
     } )
 
     return (
-      <div>
-        <input
-          placeholder={ openPost.title }
-          type="text"
-          value={ this.props.title }
-          onChange={ this.handleChangePostTitle }
-        />
-        <textarea
-          placeholder={ openPost.body }
-          value={ this.state.body }
-          onChange={ this.handleChangePost }
-        />
-        <Link to="/">
-          <button
-            onClick={ this.onClickButton }
-          >
-            Edit
-          </button>
-        </Link>
+      <>
+        <form>
+          <div>
+            <label htmlFor="changePostTitle">Change post title...</label>
+            <input id="changePostTitle"
+                   name="postTitle"
+                   placeholder={ openPost.title }
+                   type="text"
+                   value={ this.props.postTitle }
+                   onChange={ this.handleChangePost }
+                   required/>
+          </div>
+          <div>
+            <label htmlFor="changePostBody">Change post...</label>
+            <textarea id="changePostBody"
+                      name="postBody"
+                      placeholder={ openPost.body }
+                      value={ this.state.postBody }
+                      onChange={ this.handleChangePost }
+                      required/>
+          </div>
+          <Link to="/">
+            <button
+              onClick={ this.changePost }
+              disabled={ !this.state.formValid }
+              >
+              Edit
+            </button>
+          </Link>
+        </form>
+        <div>
+          <FormErrors formErrors={ this.state.formErrors }/>
+        </div>
         <Link to="/">
           POSTS
         </Link>
-      </div>
+      </>
     )
   }
 
-  handleChangePostTitle = e => {
-    this.setState( { title: e.target.value} );
+  handleChangePost = ( e ) => {
+    const name = e.target.name
+    const value = e.target.value
+    this.setState( { [name]: value },
+      () => {
+        this.validateField( name, value )
+      } )
   }
 
-  handleChangePost = e => {
-    this.setState( { body: e.target.value } )
+  validateField( fieldName, value ) {
+    let fieldValidationErrors = this.state.formErrors
+    let postTitleValid = this.state.postTitleValid
+    let postBodyValid = this.state.postBodyValid
+
+    switch ( fieldName ) {
+      case 'postTitle':
+        postTitleValid = value.length >= 3
+        fieldValidationErrors.postTitle = postTitleValid ? '' : 'Title is too short'
+        break
+      case 'postBody':
+        postBodyValid = value.length >= 20
+        fieldValidationErrors.postBody = postBodyValid ? '' : 'Body is too short'
+        break
+      default:
+        break
+    }
+    this.setState( {
+      formErrors: fieldValidationErrors,
+      postTitleValid: postTitleValid,
+      postBodyValid: postBodyValid,
+    }, this.validateForm )
+  }
+
+  validateForm() {
+    this.setState( { formValid: this.state.postTitleValid && this.state.postBodyValid } )
+  }
+
+  changePost = () => {
+    const changePostTitle = this.state.postTitle
+    const changePostBody = this.state.postBody
+    const changePostId = this.props.match.params.postId
+    this.props.editPost( changePostTitle, changePostBody, changePostId )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ( state ) => {
   return {
-    posts: state.posts.data
+    posts: state.posts.data,
   }
 }
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
-    editPost: ( title, body, id ) => dispatch(editPost( title, body, id ) ),
+    editPost: ( title, body, id ) => dispatch( editPost( title, body, id ) ),
   }
 }
 

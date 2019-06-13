@@ -72,7 +72,6 @@ class CreateNewPost extends React.PureComponent {
 
     switch ( fieldName ) {
       case 'postTitle':
-        // emailValid = value.match( /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i )
         postTitleValid = value.length >= 3
         fieldValidationErrors.postTitle = postTitleValid ? '' : 'Title is too short'
         break

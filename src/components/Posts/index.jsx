@@ -147,7 +147,7 @@ class Posts extends React.PureComponent {
         return this.props.posts.filter( todoItem => todoItem.dislike )
       case FILTER_MODE_ALPHABET:
         return this.props.posts.sort( function( a, b ) {
-          var titleA = a.title.toLowerCase(), titleB = b.title.toLowerCase()
+          const titleA = a.title.toLowerCase(), titleB = b.title.toLowerCase()
           if ( titleA < titleB )
             return -1
           if ( titleA > titleB )
@@ -156,7 +156,7 @@ class Posts extends React.PureComponent {
         } )
       case FILTER_MODE_RESET:
         return this.props.posts.sort( function( a, b ) {
-          var idA = a.id, idB = b.id
+          const idA = a.id, idB = b.id
           return idA - idB
         } )
       default:
