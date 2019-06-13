@@ -1,81 +1,129 @@
 import React from 'react'
 import addNewComment from '../../actions/addNewComment'
 import { connect } from 'react-redux'
+import FormErrors from '../FormError'
 
 class CreateNewComment extends React.PureComponent {
   state = {
     open: false,
-    email: '',
-    name: '',
-    body: '',
-  }
-  onClickButton = () => {
-    this.setState( prevState => ({
-      open: !prevState.open,
-    }) )
-    if (this.state.open) {
-      const commentEmail = this.state.email
-      const commentName = this.state.name
-      const commentBody = this.state.body
-      const postId = this.props.commentId
-      this.props.addNewComment( commentEmail, commentName,  commentBody, postId)
-      this.setState( { name: '', body: '', email: '' } )
-    }
+    userEmail: '',
+    commentName: '',
+    commentBody: '',
+    formErrors: { userEmail: '', commentName: '', commentBody: '' },
+    postEmailValid: false,
+    postNameValid: false,
+    postBodyValid: false,
+    formValid: false,
   }
 
   render() {
     return (
       <>
-        <button onClick={ this.onClickButton }>
+        <button onClick={ this.createComment }
+                disabled={ this.state.open ? !this.state.formValid : this.state.formValid }>
           { this.state.open ? 'public new comment ' : 'create new comment' }
         </button>
         { this.state.open
           ? <div>
-            <input
-              placeholder="Your email..."
-              type="text"
-              value={ this.setState.email }
-              onChange={ this.handleChangeUserEmail }
-            />
-            <input
-              placeholder="Call your comment..."
-              type="text"
-              value={ this.setState.title }
-              onChange={ this.handleChangeCommentName }
-            />
-            <textarea
-              placeholder="Write your comment ..."
-              value={ this.state.body }
-              onChange={ this.handleChangeComment }
-            />
-            {/*<button*/}
-            {/*  onClick={ this.createPost }*/}
-            {/*>*/}
-            {/*  Public new comment*/}
-            {/*</button>*/}
+            <div>
+              <label htmlFor="commentName">Call your comment...</label>
+              <input id="commentName"
+                     name="commentName"
+                     placeholder="Title..."
+                     type="text"
+                     value={ this.state.commentName }
+                     onChange={ this.handleCommentInput }
+                     required/>
+            </div>
+            <div>
+              <label htmlFor="userEmail">Your email...</label>
+              <input id="userEmail"
+                     name="userEmail"
+                     placeholder="Email..."
+                     type="email"
+                     value={ this.state.userEmail }
+                     onChange={ this.handleCommentInput }
+                     required/>
+            </div>
+            <div>
+              <label htmlFor="commentBody">Write your comment ...</label>
+              <textarea id="commentBody"
+                        name="commentBody"
+                        placeholder="Comment..."
+                        value={ this.state.commentBody }
+                        onChange={ this.handleCommentInput }
+                        required/>
+            </div>
           </div>
           : <></>
         }
+        <div>
+          <FormErrors formErrors={ this.state.formErrors }/>
+        </div>
       </>
     )
   }
 
-handleChangeUserEmail = e => {
-  this.setState( { email: e.target.value } )
-}
+  handleCommentInput = ( e ) => {
+    const name = e.target.name
+    const value = e.target.value
+    this.setState( { [name]: value },
+      () => {
+        this.validateField( name, value )
+      } )
+  }
 
-handleChangeCommentName = e => {
-  this.setState( { name: e.target.value } )
-}
+  validateField( fieldName, value ) {
+    let fieldValidationErrors = this.state.formErrors
+    let commentEmailValid = this.state.commentEmailValid
+    let commentNameValid = this.state.commentNameValid
+    let commentBodyValid = this.state.commentBodyValid
 
-handleChangeComment = e => {
-    this.setState( { body: e.target.value } )
+    switch ( fieldName ) {
+      case 'userEmail':
+        commentEmailValid = value.match( /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i )
+        fieldValidationErrors.commentEmail = commentEmailValid ? '' : 'Incorrect email'
+        break
+      case 'commentName':
+        commentNameValid = value.length >= 3
+        fieldValidationErrors.commentName = commentNameValid ? '' : 'Title is too short'
+        break
+      case 'commentBody':
+        commentBodyValid = value.length >= 20
+        fieldValidationErrors.commentBody = commentBodyValid ? '' : 'Body is too short'
+        break
+      default:
+        break
+    }
+    this.setState( {
+      formErrors: fieldValidationErrors,
+      commentEmailValid: commentEmailValid,
+      commentNameValid: commentNameValid,
+      commentBodyValid: commentBodyValid,
+    }, this.validateForm )
+  }
+
+  validateForm() {
+    this.setState( { formValid: this.state.commentEmailValid && this.state.commentNameValid && this.state.commentBodyValid } )
+  }
+
+  createComment = () => {
+    this.setState( prevState => ({
+      open: !prevState.open,
+    }) )
+    if ( this.state.open ) {
+      const commentEmail = this.state.userEmail
+      const commentName = this.state.commentName
+      const commentBody = this.state.commentBody
+      const postId = this.props.commentId
+      this.props.addNewComment( commentName, commentEmail, commentBody, postId )
+    }
   }
 }
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
-    addNewComment: ( email, name, body, postId) => dispatch( addNewComment( email, name, body, postId ) ),
+    addNewComment: ( email, name, body, postId ) => dispatch( addNewComment( email, name, body, postId ) ),
   }
 }
 

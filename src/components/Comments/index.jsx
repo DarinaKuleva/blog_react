@@ -46,6 +46,7 @@ class Comments extends PureComponent {
             { openPost.map( ( comment ) => (
               <li key={ comment.id }>
                 <h2>{ comment.name }</h2>
+                <p>{ comment.email }</p>
                 <p>{ comment.body }</p>
               </li>
             ) ) }

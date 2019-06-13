@@ -7,9 +7,9 @@ import FormErrors from '../FormError'
 class CreateNewPost extends React.PureComponent {
 
   state = {
-    title: '',
-    body: '',
-    formErrors: { title: '', body: '' },
+    postTitle: '',
+    postBody: '',
+    formErrors: { postTitle: '', postBody: '' },
     postTitleValid: false,
     postBodyValid: false,
     formValid: false,
@@ -19,23 +19,23 @@ class CreateNewPost extends React.PureComponent {
     return (
       <>
         <form>
-          <h2>Sign up</h2>
           <div>
-            <label htmlFor="title">Call your post...</label>
-            <input name="title"
+            <label htmlFor="postTitle">Call your post...</label>
+            <input id="postTitle"
+                   name="postTitle"
                    placeholder="Title..."
                    type="text"
-                   value={ this.setState.title }
-                   onChange={ this.handleUserInput }
+                   value={ this.state.postTitle }
+                   onChange={ this.handlePostInput }
                    required/>
           </div>
           <div>
-            <label htmlFor="body">Write your post ...</label>
-            <textarea type="text"
-                      name="body"
+            <label htmlFor="postBody">Write your post ...</label>
+            <textarea id="postBody"
+                      name="postBody"
                       placeholder="Post..."
-                      value={ this.setState.title }
-                      onChange={ this.handleUserInput }/>
+                      value={ this.state.postBody }
+                      onChange={ this.handlePostInput }/>
           </div>
           <Link to="/">
             <button
@@ -56,7 +56,7 @@ class CreateNewPost extends React.PureComponent {
     )
   }
 
-  handleUserInput = ( e ) => {
+  handlePostInput = ( e ) => {
     const name = e.target.name
     const value = e.target.value
     this.setState( { [name]: value },
@@ -71,12 +71,12 @@ class CreateNewPost extends React.PureComponent {
     let postBodyValid = this.state.postBodyValid
 
     switch ( fieldName ) {
-      case 'title':
+      case 'postTitle':
         // emailValid = value.match( /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i )
         postTitleValid = value.length >= 3
         fieldValidationErrors.postTitle = postTitleValid ? '' : 'Title is too short'
         break
-      case 'body':
+      case 'postBody':
         postBodyValid = value.length >= 20
         fieldValidationErrors.postBody = postBodyValid ? '' : 'Body is too short'
         break
@@ -95,8 +95,8 @@ class CreateNewPost extends React.PureComponent {
   }
 
   createPost = () => {
-    const postTitle = this.state.title
-    const postBody = this.state.body
+    const postTitle = this.state.postTitle
+    const postBody = this.state.postBody
     this.props.addNewPost( postTitle, postBody )
   }
 }
