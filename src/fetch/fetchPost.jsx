@@ -1,7 +1,9 @@
-import { failureRequestPosts, postsFetchDataSuccess, postsIsLoading } from '../actions/postsFetch'
+import failureRequestPosts from '../actions/failureRequestPosts'
+import  postsFetchDataSuccess from '../actions/postsFetchDataSuccess'
+import  postsIsLoading from '../actions/postsIsLoading'
 import { POSTS_URL } from '../constants/api'
 
-export function postsFetchData(url) {
+function postsFetchData(url) {
   return (dispatch) => {
     dispatch(postsIsLoading(true));
 
@@ -11,3 +13,5 @@ export function postsFetchData(url) {
       .catch(() => dispatch(failureRequestPosts()));
   };
 }
+
+export default postsFetchData
