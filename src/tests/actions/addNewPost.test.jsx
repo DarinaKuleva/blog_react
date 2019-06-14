@@ -1,6 +1,6 @@
 import addNewPost  from '../../actions/addNewPost'
 
-it('addNewPost():jopa', () => {
+it('addNewPost', () => {
   const expectedAction = {
     type: 'ADD_NEW_POST',
     title: 'someTitle',

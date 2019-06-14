@@ -9,7 +9,7 @@ class CreateNewComment extends React.PureComponent {
   static propTypes = {
     addNewComment: PropTypes.func.isRequired,
     validateForm: PropTypes.func,
-    postId: PropTypes.number.isRequired
+    postId: PropTypes.number
   }
 
   state = {
