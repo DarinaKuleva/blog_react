@@ -1,4 +1,6 @@
-import { commentsFetchDataSuccess, commentsIsLoading, failureRequestComments } from "../actions/commentsFetch";
+import commentsFetchDataSuccess  from "../actions/commentsFetchDataSuccess";
+import commentsIsLoading from "../actions/commentsIsLoading";
+import failureRequestComments from "../actions/failureRequestComments";
 import {COMMENTS_URL} from '../constants/api'
 
 export function commentsFetchData(url) {
