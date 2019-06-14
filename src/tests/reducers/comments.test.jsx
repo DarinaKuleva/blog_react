@@ -54,4 +54,48 @@ describe('comments reducer', () => {
     })
   })
 
+  it( 'ADD_NEW_COMMENT', () => {
+    const initialState = {
+      data: [{
+        name: 'name',
+        email: 'email',
+        body: 'body',
+        id: 2,
+        postId: 1,
+      }],
+      loading: false,
+      error: false,
+    }
+
+    const action = {
+      type: 'ADD_NEW_COMMENT',
+      data: [{
+        name: 'name2',
+        email: 'email2',
+        body: 'body2',
+        id: 1,
+        postId: 1
+      }],
+    }
+
+    expect( comments( initialState, action ) ).toEqual( {
+      ...initialState,
+      data: [
+        {
+          name: action.name,
+          email: action.email,
+          body: action.body,
+          id: 2,
+          postId: action.postId,
+        },
+        {
+          name: 'name',
+          email: 'email',
+          body: 'body',
+          id: 2,
+          postId: 1,
+        },
+      ],
+    } )
+  } )
 })

@@ -224,6 +224,4 @@ describe( 'posts reducer', () => {
       ],
     } )
   } )
-
-
 } )
