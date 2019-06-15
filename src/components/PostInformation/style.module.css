@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 60px;
+  margin-bottom: 50px;
+
+  text-align: center;
+}
+
+.caption {
+  margin: 0 70px 0 0;
+  padding-left: 45px;
+
+  color: #000;
+  font-weight: lighter;
+  font-size: 32px;
+}
+
+.title {
+  position: relative;
+
+  margin: 0;
+  padding-left: 45px;
+
+  color: #1c1a6d;
+  font-weight: lighter;
+  font-size: 27px;
+}
+
+.title::before {
+  position: absolute;
+  top: -5px;
+  left: 0;
+
+  width: 40px;
+  height: 40px;
+
+  background-image: url('../../static/img/doc.svg');
+  background-size: 40px;
+
+  content: '';
+}
