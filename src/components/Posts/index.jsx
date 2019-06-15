@@ -58,7 +58,7 @@ class Posts extends React.PureComponent {
         <div className={blog.header}>
           <h1 className={blog.logo}>Blog</h1>
           <Link to={`/create-post`}>
-            <button className={blog.create_post}>
+            <button className={blog.create}>
               CREATE NEW POST
             </button>
           </Link>

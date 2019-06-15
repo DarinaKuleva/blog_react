@@ -64,7 +64,7 @@ a {
   background: linear-gradient(to top right, #5990ea, #355eff);
 }
 
-.create_post {
+.create {
   padding: 20px;
 
   color: #4159ff;
@@ -76,8 +76,8 @@ a {
   cursor: pointer;
 }
 
-.create_post:hover,
-.create_post:active {
+.create:hover,
+.create:active {
   color: #fff;
 
   background-color: #a82bff;
@@ -87,7 +87,7 @@ a {
   transform: scale(1.05);
 }
 
-.create_post:active {
+.create:active {
   -webkit-transform: scale(0.95);
   -ms-transform: scale(0.95);
   transform: scale(0.95);

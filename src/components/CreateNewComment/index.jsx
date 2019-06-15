@@ -30,7 +30,7 @@ class CreateNewComment extends React.PureComponent {
       <>
         <button onClick={ this.createComment }
                 disabled={ this.state.open ? !this.state.formValid : this.state.formValid }
-        className={blog.create_post}>
+        className={blog.create}>
           { this.state.open ? 'PUBLIC NEW COMMENT' : 'CREATE NEW COMMENT' }
         </button>
         { this.state.open
