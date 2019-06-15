@@ -1,0 +1,23 @@
+.like {
+  position: absolute;
+
+  width: 20px;
+  height: 20px;
+
+  background: transparent;
+  background-image: url('../../static/img/dislike.svg');
+  background-position: center;
+  border: 0;
+  outline: none;
+  transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.like:active,
+.like:hover {
+  width: 25px;
+  height: 25px;
+
+  background-image: url('../../static/img/dislike-active.svg');
+  transform: rotate(180deg);
+}

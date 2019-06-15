@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 .container {
   width: 80%;
   margin: 30px auto 0 auto;
@@ -36,8 +40,8 @@
 .sorting {
   display: flex;
   flex-wrap: nowrap;
-  width: 100%;
-  margin-bottom: 30px;
+  width: 80%;
+  margin: 0 auto;
 
   border: 1px solid #4159ff;
   border-right: none;
@@ -45,11 +49,12 @@
 
 .sorting__item {
   width: 25%;
-  padding: 20px 0;
+  padding: 15px 0;
 
   background-color: transparent;
   border: none;
   border-right: 1px solid #4159ff;
+  cursor: pointer;
 }
 
 .sorting__item:hover,
@@ -59,10 +64,103 @@
   background: linear-gradient(to top right, #5990ea, #355eff);
 }
 
-.search {
-  width: 100%;
-  padding: 20px 40px;
+.create_post {
+  padding: 20px;
 
+  color: #4159ff;
+  text-decoration: none;
+
+  background-color: #fff;
   border: 1px solid #4159ff;
   border-radius: 20px;
+  cursor: pointer;
+}
+
+.create_post:hover,
+.create_post:active {
+  color: #fff;
+
+  background-color: #a82bff;
+  border: 1px solid #fff;
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+}
+
+.create_post:active {
+  -webkit-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+.posts {
+  margin-top: 50px;
+
+  list-style-type: none;
+}
+
+.posts_item {
+  position: relative;
+
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.posts_item::before {
+  position: absolute;
+  top: -5px;
+  left: 0;
+
+  width: 40px;
+  height: 40px;
+
+  background-image: url('../../static/img/doc.svg');
+  background-size: 40px;
+
+  content: '';
+}
+
+.posts_title {
+  margin: 0;
+  padding-left: 45px;
+
+  color: #1c1a6d;
+  font-weight: lighter;
+  font-size: 27px;
+}
+
+.posts_body {
+  color: #000;
+}
+
+.posts_rating {
+  position: absolute;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-right: 50px;
+}
+
+.post_information {
+  width: 90%;
+  margin-bottom: 40px;
+}
+
+.button {
+  margin-right: 15px;
+  padding: 10px 15px;
+
+  color: #fff;
+
+  background: linear-gradient(to top right, #5990ea, #355eff);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.button:active,
+.button:focus {
+  outline: none;
 }

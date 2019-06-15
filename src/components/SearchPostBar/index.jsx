@@ -1,6 +1,6 @@
 import React from 'react'
 
-import blog from '../Posts/style.module.css'
+import search from './style.module.css'
 import findPost from '../../actions/findPost'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -8,45 +8,49 @@ import PropTypes from 'prop-types'
 class SearchPostBar extends React.PureComponent {
 
   static propTypes = {
-    findPost: PropTypes.func.isRequired
+    findPost: PropTypes.func.isRequired,
   }
 
   startSearch = () => {
-    this.props.findPost( this.searchInput.value )
+    this.props.findPost(this.searchInput.value)
   }
 
   resetSearch = () => {
-    this.props.findPost( '' )
+    this.props.findPost('')
     this.searchInput.value = ''
   }
 
   render() {
     return (
-      <div>
+      <section className={search.container}>
         <input
           type="text"
-          ref={ ( input ) => {
+          ref={(input) => {
             this.searchInput = input
-          } }
-          placeholder="Искать"
-          className={ blog.search }
-          onKeyDown={ this.handleKeyDown }
+          }}
+          placeholder="Search..."
+          className={search.input}
+          onKeyDown={this.handleKeyDown}
         />
-        <button onClick={ this.startSearch }>Find post</button>
-        <button onClick={ this.resetSearch }>Сбросить поиск</button>
-      </div>
+          <button onClick={this.resetSearch}
+                  className={search.resetSearch_button}>
+          </button>
+        <button onClick={this.startSearch}
+                className={search.find_button}>
+        </button>
+      </section>
     )
   }
 
-  handleKeyDown = ( e ) => {
-    if ( e.key === 'Enter' ) this.startSearch()
+  handleKeyDown = (e) => {
+    if (e.key === 'Enter') this.startSearch()
   }
 }
 
-const mapDispatchToProps = ( dispatch ) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    findPost: ( title, body ) => dispatch( findPost( title, body ) ),
+    findPost: (title, body) => dispatch(findPost(title, body)),
   }
 }
 
-export default connect( null, mapDispatchToProps )( SearchPostBar )
+export default connect(null, mapDispatchToProps)(SearchPostBar)

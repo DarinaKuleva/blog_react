@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import blog from '../Posts/style.module.css'
 
 class RemovePost extends React.PureComponent {
 
@@ -9,7 +10,8 @@ class RemovePost extends React.PureComponent {
 
   render() {
     return (
-      <button onClick={ this.props.removePost }>DELETE</button>
+      <button onClick={ this.props.removePost }
+              className={blog.button}>DELETE POST</button>
     )
   }
 }

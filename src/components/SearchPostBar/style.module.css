@@ -1,0 +1,51 @@
+.container {
+  position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.input {
+  width: 100%;
+  padding: 20px 40px;
+
+  border: 1px solid #4159ff;
+}
+
+.find_button {
+  position: absolute;
+  right: 0;
+  bottom: 50%;
+
+  width: 55px;
+  height: 55px;
+  margin-right: 10px;
+  margin-bottom: -27.5px;
+
+  background: transparent;
+  background-image: url('../../static/img/search.svg');
+  background-position: center;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.resetSearch_button {
+  position: absolute;
+  right: 0;
+  bottom: 50%;
+
+  width: 20px;
+  height: 20px;
+  margin-right: 80px;
+  margin-bottom: -10px;
+
+  background: transparent;
+  background-image: url('../../static/img/close.svg');
+  background-position: center;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}

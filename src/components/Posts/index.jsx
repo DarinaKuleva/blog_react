@@ -11,7 +11,13 @@ import LikePost from '../LikePost'
 import DislikePost from '../DislikePost'
 import likePost from '../../actions/likePost'
 import dislikePost from '../../actions/dislikePost'
-import {FILTER_MODE_ALL, FILTER_MODE_LIKE, FILTER_MODE_DISLIKE, FILTER_MODE_ALPHABET, FILTER_MODE_RESET } from '../../constants/index'
+import {
+  FILTER_MODE_ALL,
+  FILTER_MODE_LIKE,
+  FILTER_MODE_DISLIKE,
+  FILTER_MODE_ALPHABET,
+  FILTER_MODE_RESET,
+} from '../../constants/index'
 import Filter from '../Filter'
 
 import blog from './style.module.css'
@@ -24,11 +30,11 @@ class Posts extends React.PureComponent {
   }
 
   state = {
-    filter: FILTER_MODE_ALL
+    filter: FILTER_MODE_ALL,
   }
 
   componentDidMount() {
-    if ( this.props.posts.length === 0 ) {
+    if (this.props.posts.length === 0) {
       this.props.fetchData()
     }
   }
@@ -36,101 +42,105 @@ class Posts extends React.PureComponent {
   render() {
     let {
       failureRequest,
-      isLoading
+      isLoading,
     } = this.props
 
     const posts = this.getTodoList()
 
-    if ( failureRequest ) {
+    if (failureRequest) {
       return <p>Sorry! There was an error loading the items</p>
     }
-    if ( isLoading ) {
+    if (isLoading) {
       return <p>Loading…</p>
     }
     return (
-      <section className={ blog.container }>
-        <div className={ blog.header }>
-          <h1 className={ blog.logo }>Blog</h1>
-          <Link to={ `/create-post` }>
-            <button>
-              Create new post
+      <section className={blog.container}>
+        <div className={blog.header}>
+          <h1 className={blog.logo}>Blog</h1>
+          <Link to={`/create-post`}>
+            <button className={blog.create_post}>
+              CREATE NEW POST
             </button>
           </Link>
         </div>
-        <div className={ blog.sorting }>
-          <Filter
-            filterLike={ this.filterLike }
-            filterDislike={ this.filterDislike }
-            filterAll={ this.filterAll }
-            filterAlphabet={ this.filterAlphabet }
-            filterReset={ this.filterReset }/>
-          {/*<button className={blog.sorting__item}>По алфавиту</button>*/ }
-        </div>
         <SearchPostBar/>
-        <ul>
-          { posts.map( ( post ) => (
-            <li key={ post.id }>
-              <Link to={ `post-information/${ post.id }` }>
-                <h2>{ post.title }</h2>
-                <p>{ post.body }</p>
-              </Link>
-              <RemovePost removePost={ () => this.props.removePost( post.id ) }/>
-              <Link to={ `/edit-post/${ post.id }` }>
-                <button>
-                  Edit post
-                </button>
-              </Link>
-              <LikePost likePost={ () => this.props.likePost( post.id ) }/>
-              <DislikePost dislikePost={ () => this.props.dislikePost( post.id ) }/>
-              <ViewCommentsButton commentId={ post.id }/>
+        <div className={blog.sorting}>
+          <Filter
+            filterLike={this.filterLike}
+            filterDislike={this.filterDislike}
+            filterAll={this.filterAll}
+            filterAlphabet={this.filterAlphabet}
+            filterReset={this.filterReset}/>
+        </div>
+        <ul className={blog.posts}>
+          {posts.map((post) => (
+            <li key={post.id}
+                className={blog.posts_item}>
+              <div className={blog.post_information}>
+                <Link to={`post-information/${post.id}`}>
+                  <h2 className={blog.posts_title}>{post.title}</h2>
+                  <p className={blog.posts_body}>{post.body}</p>
+                </Link>
+                <RemovePost removePost={() => this.props.removePost(post.id)}/>
+                <Link to={`/edit-post/${post.id}`}>
+                  <button className={blog.button}>
+                    EDIT POST
+                  </button>
+                </Link>
+                <ViewCommentsButton commentId={post.id}/>
+              </div>
+              <div className={blog.posts_rating}>
+                <LikePost likePost={() => this.props.likePost(post.id)}/>
+                <DislikePost dislikePost={() => this.props.dislikePost(post.id)}/>
+              </div>
             </li>
-          ) ) }
+          ))}
         </ul>
       </section>
     )
   }
 
   getTodoList = () => {
-    switch ( this.state.filter ) {
+    switch (this.state.filter) {
       case FILTER_MODE_ALL:
         return this.props.posts
       case FILTER_MODE_LIKE:
-        return this.props.posts.filter( todoItem => todoItem.like )
+        return this.props.posts.filter(todoItem => todoItem.like)
       case FILTER_MODE_DISLIKE:
-        return this.props.posts.filter( todoItem => todoItem.dislike )
+        return this.props.posts.filter(todoItem => todoItem.dislike)
       case FILTER_MODE_ALPHABET:
-        return this.props.posts.sort( function( a, b ) {
+        return this.props.posts.sort(function(a, b) {
           const titleA = a.title.toLowerCase(), titleB = b.title.toLowerCase()
-          if ( titleA < titleB )
+          if (titleA < titleB)
             return -1
-          if ( titleA > titleB )
+          if (titleA > titleB)
             return 1
           return 0
-        } )
+        })
       case FILTER_MODE_RESET:
-        return this.props.posts.sort( function( a, b ) {
+        return this.props.posts.sort(function(a, b) {
           const idA = a.id, idB = b.id
           return idA - idB
-        } )
+        })
       default:
-        break;
+        break
     }
   }
 
   filterAll = () => {
-    this.setState({filter: FILTER_MODE_ALL})
+    this.setState({ filter: FILTER_MODE_ALL })
   }
   filterLike = () => {
-    this.setState({filter: FILTER_MODE_LIKE})
+    this.setState({ filter: FILTER_MODE_LIKE })
   }
   filterDislike = () => {
-    this.setState({filter: FILTER_MODE_DISLIKE})
+    this.setState({ filter: FILTER_MODE_DISLIKE })
   }
   filterAlphabet = () => {
-    this.setState({filter: FILTER_MODE_ALPHABET})
+    this.setState({ filter: FILTER_MODE_ALPHABET })
   }
   filterReset = () => {
-    this.setState({filter: FILTER_MODE_RESET})
+    this.setState({ filter: FILTER_MODE_RESET })
   }
 }
 
@@ -138,7 +148,7 @@ const mapStateToProps = (state) => {
   return {
     posts: state.posts.data.filter(post => post.title.includes(state.filterPosts)),
     failureRequest: state.posts.error,
-    isLoading: state.posts.loading
+    isLoading: state.posts.loading,
   }
 }
 
