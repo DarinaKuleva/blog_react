@@ -1,0 +1,22 @@
+.dislike {
+  position: absolute;
+  bottom: -50px;
+
+  width: 20px;
+  height: 20px;
+
+  background: transparent;
+  background-image: url('../../static/img/dislike.svg');
+  background-position: center;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.dislike:active,
+.dislike:hover {
+  width: 25px;
+  height: 25px;
+
+  background-image: url('../../static/img/dislike-active.svg');
+}

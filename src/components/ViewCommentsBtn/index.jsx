@@ -1,6 +1,7 @@
 import React from 'react'
 import Comments from '../Comments'
 import PropTypes from 'prop-types'
+import blog from '../Posts/style.module.css'
 
 class ViewCommentsButton extends React.PureComponent {
 
@@ -19,8 +20,9 @@ class ViewCommentsButton extends React.PureComponent {
 
     return (
       <>
-        <button onClick={ this.viewComments }>
-          { this.state.open ? 'hide comments' : 'show comments' }
+        <button onClick={ this.viewComments }
+                className={blog.button}>
+          { this.state.open ? 'HIDE COMMENTS' : 'SHOW COMMENTS' }
         </button>
         { this.state.open
           ? <Comments commentId={ commentId }/>

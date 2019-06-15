@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { commentsFetchData } from '../../fetch/fetchComments'
 import NewCommentBtn from '../CreateNewComment'
 
+import commentBlock from './style.module.css'
+
 class Comments extends PureComponent {
 
   static propTypes = {
@@ -40,14 +42,15 @@ class Comments extends PureComponent {
     } )
 
     return (
-      <div>
+      <div className={commentBlock.container}>
         <NewCommentBtn commentId={commentId}/>
         { openPost.length > 0 ?
-          <ul>
+          <ul className={commentBlock.list}>
             { openPost.map( ( comment ) => (
-              <li key={ comment.id }>
-                <h2>{ comment.name }</h2>
-                <p>{ comment.email }</p>
+              <li key={ comment.id }
+                  className={commentBlock.item}>
+                <h2 className={commentBlock.name}>{ comment.name }</h2>
+                <p className={commentBlock.email}>{ comment.email }</p>
                 <p>{ comment.body }</p>
               </li>
             ) ) }

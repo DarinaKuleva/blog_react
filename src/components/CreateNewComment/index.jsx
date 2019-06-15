@@ -3,6 +3,7 @@ import addNewComment from '../../actions/addNewComment'
 import { connect } from 'react-redux'
 import FormErrors from '../FormError'
 import PropTypes from 'prop-types'
+import blog from '../Posts/style.module.css'
 
 class CreateNewComment extends React.PureComponent {
 
@@ -28,8 +29,9 @@ class CreateNewComment extends React.PureComponent {
     return (
       <>
         <button onClick={ this.createComment }
-                disabled={ this.state.open ? !this.state.formValid : this.state.formValid }>
-          { this.state.open ? 'public new comment ' : 'create new comment' }
+                disabled={ this.state.open ? !this.state.formValid : this.state.formValid }
+        className={blog.create_post}>
+          { this.state.open ? 'PUBLIC NEW COMMENT' : 'CREATE NEW COMMENT' }
         </button>
         { this.state.open
           ? <div>

@@ -5,6 +5,16 @@ const Filter = ( { filterLike, filterDislike, filterAll, filterAlphabet, filterR
   return (
     <>
       <button
+        onClick={ filterAll }
+        className={blog.sorting__item}>
+        SHOW ALL
+      </button>
+      <button
+        onClick={ filterAlphabet }
+        className={blog.sorting__item}>
+        FILTER ALPHABET
+      </button>
+      <button
         onClick={ filterLike }
         className={blog.sorting__item}>
         FILTER LIKE
@@ -15,19 +25,9 @@ const Filter = ( { filterLike, filterDislike, filterAll, filterAlphabet, filterR
         FILTER DISLIKE
       </button>
       <button
-        onClick={ filterAll }
-        className={blog.sorting__item}>
-        ALL
-      </button>
-      <button
-        onClick={ filterAlphabet }
-        className={blog.sorting__item}>
-        ALPHABET
-      </button>
-      <button
         onClick={ filterReset }
         className={blog.sorting__item}>
-        RESET
+        RESET FILTER
       </button>
     </>
   )
