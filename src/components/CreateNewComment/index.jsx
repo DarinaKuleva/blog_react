@@ -21,9 +21,9 @@ class CreateNewComment extends React.PureComponent {
     userEmail: '',
     commentName: '',
     commentBody: '',
-    postEmailValid: false,
-    postNameValid: false,
-    postBodyValid: false,
+    commentEmailValid: false,
+    commentNameValid: false,
+    commentBodyValid: false,
     formValid: false,
   }
 
@@ -31,9 +31,8 @@ class CreateNewComment extends React.PureComponent {
     return (
       <>
         <button onClick={ this.createComment }
-                disabled={ this.state.open ? !this.state.formValid : this.state.formValid }
                 className={blog.create}>
-          { this.state.open ? 'PUBLIC NEW COMMENT' : 'CREATE NEW COMMENT'}
+         CREATE NEW COMMENT
         </button>
         { this.state.open
           ? <form className={newComment.form}>
@@ -78,6 +77,13 @@ class CreateNewComment extends React.PureComponent {
                 Write comment...
               </label>
             </div>
+            {this.state.formValid ?
+              <button onClick={this.publicComment}
+                      className={blog.create}>
+                PUBLIC NEW COMMENT
+              </button>
+              : <></>
+            }
           </form>
           : <></>
         }
@@ -104,10 +110,10 @@ class CreateNewComment extends React.PureComponent {
         commentEmailValid = value.match( /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i )
         break
       case 'commentName':
-        commentNameValid = value.length >= 3
+        commentNameValid = value.length >= 0
         break
       case 'commentBody':
-        commentBodyValid = value.length >= 3
+        commentBodyValid = value.length >= 0
         break
       default:
         break
@@ -124,16 +130,30 @@ class CreateNewComment extends React.PureComponent {
   }
 
   createComment = () => {
-    this.setState( prevState => ({
+    this.setState(prevState => ({
+        open: !prevState.open,
+      }),
+    )
+  }
+
+  publicComment = () => {
+    this.setState(prevState => ({
       open: !prevState.open,
-    }) )
-    if ( this.state.open ) {
-      const commentEmail = this.state.userEmail
-      const commentName = this.state.commentName
-      const commentBody = this.state.commentBody
-      const postId = this.props.commentId
-      this.props.addNewComment( commentName, commentEmail, commentBody, postId )
-    }
+    }))
+    const commentEmail = this.state.userEmail
+    const commentName = this.state.commentName
+    const commentBody = this.state.commentBody
+    const postId = this.props.commentId
+    this.props.addNewComment(commentName, commentEmail, commentBody, postId)
+    this.setState({
+      commentName: '',
+      userEmail: '',
+      commentBody: '',
+      commentEmailValid: false,
+      commentNameValid: false,
+      commentBodyValid: false,
+      formValid: false,
+    })
   }
 }
 
