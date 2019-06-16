@@ -1,7 +1,6 @@
 import React from 'react'
 import blog from '../Posts/style.module.css'
 import {
-  FILTER_MODE_ALL,
   FILTER_MODE_ALPHABET,
   FILTER_MODE_DISLIKE,
   FILTER_MODE_LIKE,
@@ -11,11 +10,6 @@ import {
 const Filter = ( { changeFilterMode } ) => {
   return (
     <>
-      <button
-        onClick={ () => changeFilterMode(FILTER_MODE_ALL) }
-        className={blog.sorting__item}>
-        SHOW ALL
-      </button>
       <button
         onClick={ () => changeFilterMode(FILTER_MODE_ALPHABET) }
         className={blog.sorting__item}>
@@ -34,7 +28,7 @@ const Filter = ( { changeFilterMode } ) => {
       <button
         onClick={ () => changeFilterMode(FILTER_MODE_RESET) }
         className={blog.sorting__item}>
-        RESET FILTER
+        SHOW ALL
       </button>
     </>
   )
