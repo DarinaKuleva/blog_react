@@ -49,10 +49,10 @@ class EditPost extends React.PureComponent {
           <div className={createPost.form_item}>
             <input id="changePostTitle"
                    name="postTitle"
-                   placeholder={ openPost.title }
+                   defaultValue={openPost.title}
                    type="text"
                    value={ this.props.postTitle }
-                   onChange={ this.handleChangePost }
+                   onChange={ this.handleChangePostTitle }
                    className={createPost.form_input}
                    required/>
             <label htmlFor="changePostTitle"
@@ -63,9 +63,9 @@ class EditPost extends React.PureComponent {
           <div className={createPost.form_item}>
             <textarea id="changePostBody"
                       name="postBody"
-                      placeholder={ openPost.body }
-                      value={ this.state.postBody }
-                      onChange={ this.handleChangePost }
+                      defaultValue={openPost.body}
+                      value={ this.props.postBody }
+                      onChange={ this.handleChangePostBody }
                       className={createPost.form_textarea}
                       required/>
             <label htmlFor="changePostBody"
@@ -94,13 +94,30 @@ class EditPost extends React.PureComponent {
     )
   }
 
-  handleChangePost = ( e ) => {
+  handleChangePostTitle = ( e ) => {
     const name = e.target.name
     const value = e.target.value
+    const defaultValue = document.getElementById('changePostBody').defaultValue
     this.setState( { [name]: value },
       () => {
         this.validateField( name, value )
       } )
+    if (this.state.postBody === '') {
+      this.setState({ postBody: defaultValue })
+    }
+  }
+
+  handleChangePostBody = ( e ) => {
+    const name = e.target.name
+    const value = e.target.value
+    const defaultValue = document.getElementById('changePostTitle').defaultValue
+    this.setState( { [name]: value },
+      () => {
+        this.validateField( name, value )
+      } )
+    if (this.state.postTitle === '') {
+      this.setState({ postTitle: defaultValue })
+    }
   }
 
   validateField( fieldName, value ) {
@@ -114,7 +131,7 @@ class EditPost extends React.PureComponent {
         fieldValidationErrors.postTitle = postTitleValid ? '' : 'Post title is too short'
         break
       case 'postBody':
-        postBodyValid = value.length >= 20
+        postBodyValid = value.length >= 3
         fieldValidationErrors.postBody = postBodyValid ? '' : 'Post is too short'
         break
       default:
@@ -128,7 +145,7 @@ class EditPost extends React.PureComponent {
   }
 
   validateForm() {
-    this.setState( { formValid: this.state.postTitleValid && this.state.postBodyValid } )
+    this.setState( { formValid: this.state.postTitleValid || this.state.postBodyValid } )
   }
 
   changePost = () => {
