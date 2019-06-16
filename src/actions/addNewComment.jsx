@@ -1,4 +1,4 @@
-const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT';
+import {ADD_NEW_COMMENT} from '../constants/actions'
 
 function addNewComment( name, email, body, postId ) {
   return {

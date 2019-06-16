@@ -1,4 +1,4 @@
-const COMMENTS_FETCH_DATA_SUCCESS = 'COMMENTS_FETCH_DATA_SUCCESS';
+import {COMMENTS_FETCH_DATA_SUCCESS} from '../constants/actions'
 
 function commentsFetchDataSuccess(comments) {
   return {

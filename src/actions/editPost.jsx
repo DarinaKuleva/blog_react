@@ -1,4 +1,4 @@
-const EDIT_POST = 'EDIT_POST';
+import {EDIT_POST} from '../constants/actions'
 
 function editPost( title, body, id ) {
   return {

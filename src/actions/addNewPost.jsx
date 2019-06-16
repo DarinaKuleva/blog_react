@@ -1,4 +1,4 @@
-const ADD_NEW_POST = 'ADD_NEW_POST';
+import {ADD_NEW_POST} from '../constants/actions'
 
 function addNewPost( title, body ) {
   return {

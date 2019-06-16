@@ -1,3 +1,14 @@
+import {
+  POSTS_FETCH_DATA_SUCCESS,
+  DISLIKE_POST,
+  LIKE_POST,
+  EDIT_POST,
+  REMOVE_POST,
+  ADD_NEW_POST,
+  POSTS_IS_LOADING,
+  FAILURE_REQUEST_POSTS,
+} from '../constants/actions'
+
 const initialState = {
   error: false,
   loading: false,
@@ -6,25 +17,25 @@ const initialState = {
 
 export function posts(state = initialState, action) {
   switch (action.type) {
-    case 'FAILURE_REQUEST_POSTS':
+    case FAILURE_REQUEST_POSTS:
       return {
         ...state,
         error: true,
         loading: false,
       }
-    case 'POSTS_IS_LOADING':
+    case POSTS_IS_LOADING:
       return {
         ...state,
         loading: true,
       }
-    case 'POSTS_FETCH_DATA_SUCCESS':
+    case POSTS_FETCH_DATA_SUCCESS:
       return {
         ...state,
         error: false,
         loading: false,
         data: action.posts,
       }
-    case 'ADD_NEW_POST':
+    case ADD_NEW_POST:
       const newPost = {
         title: action.title,
         body: action.body,
@@ -36,14 +47,14 @@ export function posts(state = initialState, action) {
         data: [newPost, ...state.data],
       }
 
-    case 'REMOVE_POST':
+    case REMOVE_POST:
       return {
         error: false,
         loading: false,
         data: state.data.filter(post => post.id !== action.payload),
       }
 
-    case 'EDIT_POST':
+    case EDIT_POST:
       return {
         error: false,
         loading: false,
@@ -54,7 +65,7 @@ export function posts(state = initialState, action) {
         ),
       }
 
-    case 'LIKE_POST':
+    case LIKE_POST:
       return {
         error: false,
         loading: false,
@@ -65,7 +76,7 @@ export function posts(state = initialState, action) {
         ),
       }
 
-    case 'DISLIKE_POST':
+    case DISLIKE_POST:
       return {
         error: false,
         loading: false,

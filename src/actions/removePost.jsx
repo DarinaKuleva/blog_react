@@ -1,4 +1,4 @@
-const REMOVE_POST = 'REMOVE_POST';
+import {REMOVE_POST} from '../constants/actions'
 
 function deletePost( id ) {
   return {
