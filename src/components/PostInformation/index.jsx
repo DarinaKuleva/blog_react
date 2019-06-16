@@ -8,7 +8,6 @@ import blog from '../Posts/style.module.css'
 import postInformation from './style.module.css'
 
 class PostInformation extends React.PureComponent {
-
   static propTypes = {
     posts: PropTypes.array.isRequired,
   }

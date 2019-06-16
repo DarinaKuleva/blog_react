@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { commentsFetchData } from '../../fetch/fetchComments'
 import CreateNewComment from '../CreateNewComment'
+import { commentsFetchData } from '../../fetch/fetchComments'
 
 import commentBlock from './style.module.css'
 import blog from '../Posts/style.module.css'
 
 class Comments extends PureComponent {
-
   static propTypes = {
     comments: PropTypes.array.isRequired,
     failureRequest: PropTypes.bool.isRequired,

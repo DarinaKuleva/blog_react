@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import './like.css'
 
 class LikePost extends React.PureComponent {
-
   static propTypes = {
     likePost: PropTypes.func.isRequired
   }

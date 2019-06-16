@@ -1,5 +1,4 @@
 import React from 'react';
-
 import createPost from '../CreateNewPost/style.module.css'
 
 const FormErrors = ({formErrors}) =>
