@@ -1,25 +1,27 @@
-import failureRequestComments  from '../../actions/failureRequestComments'
-import commentsIsLoading  from '../../actions/commentsIsLoading'
-import  commentsFetchDataSuccess from '../../actions/commentsFetchDataSuccess'
+import {
+  COMMENTS_FETCH_DATA_SUCCESS,
+  COMMENTS_IS_LOADING,
+  FAILURE_REQUEST_COMMENTS,
+} from '../../constants/actions'
 
 
 it('failureRequestComments', () => {
   const expectedAction = {
-    type: 'FAILURE_REQUEST_COMMENTS'
+    type: FAILURE_REQUEST_COMMENTS
   }
   expect(failureRequestComments()).toEqual(expectedAction)
 })
 
 it('commentsIsLoading', () => {
   const expectedAction = {
-    type: 'COMMENTS_IS_LOADING'
+    type: COMMENTS_IS_LOADING
   }
   expect(commentsIsLoading()).toEqual(expectedAction)
 })
 
 it('commentsFetchDataSuccess', () => {
   const expectedAction = {
-    type: 'COMMENTS_FETCH_DATA_SUCCESS',
+    type: COMMENTS_FETCH_DATA_SUCCESS,
     comments: 'some comments'
   }
   expect(commentsFetchDataSuccess('some comments')).toEqual(expectedAction)

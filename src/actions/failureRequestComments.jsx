@@ -1,4 +1,4 @@
-const FAILURE_REQUEST_COMMENTS = 'FAILURE_REQUEST_COMMENTS';
+import {FAILURE_REQUEST_COMMENTS} from '../constants/actions'
 
 function failureRequestComments(bool) {
   return {

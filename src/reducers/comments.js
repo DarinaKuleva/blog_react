@@ -1,3 +1,10 @@
+import {
+  COMMENTS_FETCH_DATA_SUCCESS,
+  ADD_NEW_COMMENT,
+  COMMENTS_IS_LOADING,
+  FAILURE_REQUEST_COMMENTS,
+} from '../constants/actions'
+
 const initialState = {
   error: false,
   loading: false,
@@ -6,25 +13,25 @@ const initialState = {
 
 export function comments(state = initialState, action) {
   switch (action.type) {
-    case 'FAILURE_REQUEST_COMMENTS':
+    case FAILURE_REQUEST_COMMENTS:
       return {
         ...state,
         error: true,
         loading: false,
       }
-    case 'COMMENTS_IS_LOADING':
+    case COMMENTS_IS_LOADING:
       return {
         ...state,
         loading: true,
       }
-    case 'COMMENTS_FETCH_DATA_SUCCESS':
+    case COMMENTS_FETCH_DATA_SUCCESS:
       return {
         ...state,
         error: false,
         loading: false,
         data: action.comments,
       }
-    case 'ADD_NEW_COMMENT':
+    case ADD_NEW_COMMENT:
       const newComment = {
         name: action.name,
         email: action.email,

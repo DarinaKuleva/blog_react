@@ -1,4 +1,4 @@
-const POSTS_FETCH_DATA_SUCCESS = 'POSTS_FETCH_DATA_SUCCESS'
+import {POSTS_FETCH_DATA_SUCCESS} from '../constants/actions'
 
 function postsFetchDataSuccess(posts) {
   return {

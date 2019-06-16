@@ -1,4 +1,4 @@
-const DISLIKE_POST = 'DISLIKE_POST';
+import {DISLIKE_POST} from '../constants/actions'
 
 function dislikePost( id ) {
   return {

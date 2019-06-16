@@ -1,4 +1,4 @@
-const POSTS_IS_LOADING = 'POSTS_IS_LOADING';
+import {POSTS_IS_LOADING} from '../constants/actions'
 
 function postsIsLoading() {
   return {

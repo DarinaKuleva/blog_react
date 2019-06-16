@@ -1,4 +1,4 @@
-const FIND_POST = 'FIND_POST';
+import {FIND_POST} from '../constants/actions'
 
 function findPost( title, body) {
   return {

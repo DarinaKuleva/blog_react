@@ -1,4 +1,4 @@
-const FAILURE_REQUEST_POSTS = 'FAILURE_REQUEST_POSTS';
+import {FAILURE_REQUEST_POSTS} from '../constants/actions'
 
 function failureRequestPosts() {
   return {

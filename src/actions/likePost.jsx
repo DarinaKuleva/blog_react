@@ -1,4 +1,4 @@
-const LIKE_POST = 'LIKE_POST';
+import {LIKE_POST} from '../constants/actions'
 
 function likePost( id ) {
   return {

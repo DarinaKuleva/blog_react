@@ -1,4 +1,4 @@
-const COMMENTS_IS_LOADING = 'COMMENTS_IS_LOADING';
+import {COMMENTS_IS_LOADING} from '../constants/actions'
 
 function commentsIsLoading() {
   return {
