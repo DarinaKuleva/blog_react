@@ -124,9 +124,10 @@ a {
   margin: 0;
   padding-left: 45px;
 
-  color: #1c1a6d;
+  color: #000;
   font-weight: lighter;
-  font-size: 27px;
+  font-size: 22px;
+  text-transform: uppercase;
 }
 
 .posts_body {

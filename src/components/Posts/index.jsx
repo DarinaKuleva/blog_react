@@ -66,11 +66,7 @@ class Posts extends React.PureComponent {
         <SearchPostBar/>
         <div className={blog.sorting}>
           <Filter
-            filterLike={this.filterLike}
-            filterDislike={this.filterDislike}
-            filterAll={this.filterAll}
-            filterAlphabet={this.filterAlphabet}
-            filterReset={this.filterReset}/>
+            changeFilterMode={this.changeFilterMode}/>
         </div>
         <ul className={blog.posts}>
           {posts.map((post) => (
@@ -127,20 +123,8 @@ class Posts extends React.PureComponent {
     }
   }
 
-  filterAll = () => {
-    this.setState({ filter: FILTER_MODE_ALL })
-  }
-  filterLike = () => {
-    this.setState({ filter: FILTER_MODE_LIKE })
-  }
-  filterDislike = () => {
-    this.setState({ filter: FILTER_MODE_DISLIKE })
-  }
-  filterAlphabet = () => {
-    this.setState({ filter: FILTER_MODE_ALPHABET })
-  }
-  filterReset = () => {
-    this.setState({ filter: FILTER_MODE_RESET })
+  changeFilterMode = (filterMode) => {
+    this.setState({filter: filterMode})
   }
 }
 

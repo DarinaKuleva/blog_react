@@ -56,7 +56,7 @@ class Comments extends PureComponent {
             ) ) }
           </ul>
           :
-          <div>No comments(переписать)</div>
+          <div className={commentBlock.no_comments}>This post hasn't comments yet</div>
         }
       </div>
     )
