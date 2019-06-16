@@ -48,10 +48,10 @@ class Posts extends React.PureComponent {
     const posts = this.getTodoList()
 
     if (failureRequest) {
-      return <p>Sorry! There was an error loading the items</p>
+      return <p className={blog.error}>Sorry! There was an error loading the posts</p>
     }
     if (isLoading) {
-      return <p>Loading…</p>
+      return <p className={blog.loading}></p>
     }
     return (
       <section className={blog.container}>

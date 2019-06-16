@@ -2,6 +2,46 @@ a {
   text-decoration: none;
 }
 
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 100px;
+  height: 100px;
+  margin-top: -50px;
+  margin-left: -50px;
+
+  background-image: url('../../static/img/loading.gif');
+  background-repeat: no-repeat;
+  background-size: 100px;
+  border-radius: 50px;
+}
+
+.error {
+  position: relative;
+
+  padding-left: 100px;
+
+  color: #1c1a6d;
+  font-weight: lighter;
+  font-size: 27px;
+}
+
+.error::before {
+  position: absolute;
+  top: -50%;
+  left: 20px;
+
+  width: 64px;
+  height: 64px;
+
+  background-image: url('../../static/img/error.svg');
+  background-size: 64px;
+
+  content: '';
+}
+
 .container {
   width: 80%;
   margin: 30px auto 0 auto;
