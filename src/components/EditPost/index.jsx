@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import editPost from '../../actions/editPost'
 import FormErrors from '../FormError'
 import PropTypes from 'prop-types'
+import createPost from '../CreateNewPost/style.module.css'
+import blog from '../Posts/style.module.css'
 
 class EditPost extends React.PureComponent {
 
@@ -36,43 +38,59 @@ class EditPost extends React.PureComponent {
     } )
 
     return (
-      <>
-        <form>
-          <div>
-            <label htmlFor="changePostTitle">Change post title...</label>
+      <div className={createPost.container}>
+        <div className={createPost.header}>
+          <Link to="/" className={blog.button}>
+            BACK TO POSTS
+          </Link>
+          <h2 className={createPost.caption}>EDIT POST</h2>
+        </div>
+        <form className={createPost.form}>
+          <div className={createPost.form_item}>
             <input id="changePostTitle"
                    name="postTitle"
                    placeholder={ openPost.title }
                    type="text"
                    value={ this.props.postTitle }
                    onChange={ this.handleChangePost }
+                   className={createPost.form_input}
                    required/>
+            <label htmlFor="changePostTitle"
+                   className={createPost.form_label}>
+              Change post title...
+            </label>
           </div>
-          <div>
-            <label htmlFor="changePostBody">Change post...</label>
+          <div className={createPost.form_item}>
             <textarea id="changePostBody"
                       name="postBody"
                       placeholder={ openPost.body }
                       value={ this.state.postBody }
                       onChange={ this.handleChangePost }
+                      className={createPost.form_textarea}
                       required/>
+            <label htmlFor="changePostBody"
+                   className={createPost.form_label}>
+              Change post..
+            </label>
+          </div>
+          <div>
+            <FormErrors formErrors={ this.state.formErrors }/>
           </div>
           <Link to="/">
-            <button
-              onClick={ this.changePost }
-              disabled={ !this.state.formValid }
-              >
-              Edit
-            </button>
+            { this.state.formValid ?
+              <button
+                onClick={ this.changePost }
+                disabled={ !this.state.formValid }
+                className={blog.create}>
+                EDIT POST
+              </button>
+              :
+              <>
+              </>
+            }
           </Link>
         </form>
-        <div>
-          <FormErrors formErrors={ this.state.formErrors }/>
-        </div>
-        <Link to="/">
-          POSTS
-        </Link>
-      </>
+      </div>
     )
   }
 
@@ -93,11 +111,11 @@ class EditPost extends React.PureComponent {
     switch ( fieldName ) {
       case 'postTitle':
         postTitleValid = value.length >= 3
-        fieldValidationErrors.postTitle = postTitleValid ? '' : 'Title is too short'
+        fieldValidationErrors.postTitle = postTitleValid ? '' : 'Post title is too short'
         break
       case 'postBody':
         postBodyValid = value.length >= 20
-        fieldValidationErrors.postBody = postBodyValid ? '' : 'Body is too short'
+        fieldValidationErrors.postBody = postBodyValid ? '' : 'Post is too short'
         break
       default:
         break

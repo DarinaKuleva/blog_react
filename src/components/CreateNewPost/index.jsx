@@ -70,7 +70,7 @@ class CreateNewPost extends React.PureComponent {
                 onClick={ this.createPost }
                 disabled={ !this.state.formValid }
                 className={blog.create}>
-                PUBLISH
+                PUBLISH POST
               </button>
               :
               <>
