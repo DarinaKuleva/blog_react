@@ -70,8 +70,11 @@ export function posts(state = initialState, action) {
         error: false,
         loading: false,
         data: state.data.map(post =>
-          parseInt(action.payload, 10) === post.id
+          parseInt(action.payload, 10) === post.id &&
+          (post.like === undefined || !post.like)
             ? { ...post, like: true, dislike: false }
+            : parseInt(action.payload, 10) === post.id && post.like === true
+            ? { ...post, like: false, dislike: false }
             : post
         ),
       }
@@ -81,8 +84,11 @@ export function posts(state = initialState, action) {
         error: false,
         loading: false,
         data: state.data.map(post =>
-          parseInt(action.payload, 10) === post.id
+          parseInt(action.payload, 10) === post.id &&
+          (post.dislike === undefined || !post.dislike)
             ? { ...post, like: false, dislike: true }
+            : parseInt(action.payload, 10) === post.id && post.dislike === true
+            ? { ...post, like: false, dislike: false }
             : post
         ),
       }
