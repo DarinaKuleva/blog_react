@@ -6,7 +6,7 @@ import FormErrors from '../FormError'
 import addNewPost from '../../actions/addNewPost'
 
 import blog from '../Posts/style.module.css'
-import createPost from './style.module.css'
+import newPost from './style.module.css'
 
 class CreateNewPost extends React.PureComponent {
   static propTypes = {
@@ -25,38 +25,38 @@ class CreateNewPost extends React.PureComponent {
 
   render() {
     return (
-      <div className={createPost.container}>
-        <div className={createPost.header}>
+      <div className={newPost.container}>
+        <div className={newPost.header}>
           <Link to="/" className={blog.button}>
             BACK TO POSTS
           </Link>
-          <h2 className={createPost.caption}>CREATE NEW POST</h2>
+          <h2 className={newPost.caption}>CREATE NEW POST</h2>
         </div>
-        <form className={createPost.form}>
-          <div className={createPost.form_item}>
+        <form className={newPost.form}>
+          <div className={newPost.form_item}>
             <input id="postTitle"
                    name="postTitle"
                    placeholder="Call your post..."
                    type="text"
                    value={ this.state.postTitle }
                    onChange={ this.handlePostInput }
-                   className={createPost.form_input}
+                   className={newPost.form_input}
                    required/>
             <label htmlFor="postTitle"
-                   className={createPost.form_label}>
+                   className={newPost.form_label}>
               Call your post...
             </label>
           </div>
-          <div className={createPost.form_item}>
+          <div className={newPost.form_item}>
             <textarea id="postBody"
                       name="postBody"
                       placeholder="Write your post..."
                       value={ this.state.postBody }
                       onChange={ this.handlePostInput }
-                      className={createPost.form_textarea}
+                      className={newPost.form_textarea}
                       required/>
             <label htmlFor="postBody"
-                   className={createPost.form_label}>
+                   className={newPost.form_label}>
               Write your post...
             </label>
           </div>
