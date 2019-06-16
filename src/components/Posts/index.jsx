@@ -68,10 +68,6 @@ class Posts extends React.PureComponent {
           </Link>
         </div>
         <SearchPostBar/>
-        {/*<div className={blog.sorting}>*/}
-          {/*<Filter*/}
-            {/*changeFilterMode={this.changeFilterMode}/>*/}
-        {/*</div>*/}
         <ul className={blog.posts}>
           {posts.map((post) => (
             <li key={post.id}
