@@ -1,4 +1,9 @@
 .container {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.header {
   display: flex;
   flex-wrap: nowrap;
   margin-top: 60px;

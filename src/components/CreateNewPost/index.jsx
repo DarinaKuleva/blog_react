@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import FormErrors from '../FormError'
 import PropTypes from 'prop-types'
 
+import blog from '../Posts/style.module.css'
+import createPost from './style.module.css'
+
 class CreateNewPost extends React.PureComponent {
 
   static propTypes = {
@@ -23,42 +26,59 @@ class CreateNewPost extends React.PureComponent {
 
   render() {
     return (
-      <>
-        <form>
-          <div>
-            <label htmlFor="postTitle">Call your post...</label>
+      <div className={createPost.container}>
+        <div className={createPost.header}>
+          <Link to="/" className={blog.button}>
+            BACK TO POSTS
+          </Link>
+          <h2 className={createPost.caption}>CREATE NEW POST</h2>
+        </div>
+        <form className={createPost.form}>
+          <div className={createPost.form_item}>
             <input id="postTitle"
                    name="postTitle"
-                   placeholder="Title..."
+                   placeholder="Call your post..."
                    type="text"
                    value={ this.state.postTitle }
                    onChange={ this.handlePostInput }
+                   className={createPost.form_input}
                    required/>
+            <label htmlFor="postTitle"
+                   className={createPost.form_label}>
+              Call your post...
+            </label>
           </div>
-          <div>
-            <label htmlFor="postBody">Write your post ...</label>
+          <div className={createPost.form_item}>
             <textarea id="postBody"
                       name="postBody"
-                      placeholder="Post..."
+                      placeholder="Write your post..."
                       value={ this.state.postBody }
-                      onChange={ this.handlePostInput }/>
+                      onChange={ this.handlePostInput }
+                      className={createPost.form_textarea}
+                      required/>
+            <label htmlFor="postBody"
+                   className={createPost.form_label}>
+              Write your post...
+            </label>
+          </div>
+          <div>
+            <FormErrors formErrors={ this.state.formErrors }/>
           </div>
           <Link to="/">
-            <button
-              onClick={ this.createPost }
-              disabled={ !this.state.formValid }
-            >
-              Publish
-            </button>
+            { this.state.formValid ?
+              <button
+                onClick={ this.createPost }
+                disabled={ !this.state.formValid }
+                className={blog.create}>
+                PUBLISH
+              </button>
+              :
+              <>
+              </>
+            }
           </Link>
         </form>
-        <div>
-          <FormErrors formErrors={ this.state.formErrors }/>
-        </div>
-        <Link to="/">
-          POSTS
-        </Link>
-      </>
+      </div>
     )
   }
 
@@ -79,11 +99,11 @@ class CreateNewPost extends React.PureComponent {
     switch ( fieldName ) {
       case 'postTitle':
         postTitleValid = value.length >= 3
-        fieldValidationErrors.postTitle = postTitleValid ? '' : 'Title is too short'
+        fieldValidationErrors.postTitle = postTitleValid ? '' : 'Post title is too short'
         break
       case 'postBody':
         postBodyValid = value.length >= 20
-        fieldValidationErrors.postBody = postBodyValid ? '' : 'Body is too short'
+        fieldValidationErrors.postBody = postBodyValid ? '' : 'Post is too short'
         break
       default:
         break
