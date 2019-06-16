@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import './dislike.css'
 
 class DislikePost extends React.PureComponent {
-
   static propTypes = {
     dislikePost: PropTypes.func.isRequired
   }

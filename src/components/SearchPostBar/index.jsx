@@ -1,12 +1,11 @@
 import React from 'react'
-
-import search from './style.module.css'
-import findPost from '../../actions/findPost'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import findPost from '../../actions/findPost'
+
+import search from './style.module.css'
 
 class SearchPostBar extends React.PureComponent {
-
   static propTypes = {
     findPost: PropTypes.func.isRequired,
   }

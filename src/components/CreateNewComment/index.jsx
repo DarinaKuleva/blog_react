@@ -1,15 +1,13 @@
 import React from 'react'
-import addNewComment from '../../actions/addNewComment'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-
+import addNewComment from '../../actions/addNewComment'
 
 import blog from '../Posts/style.module.css'
 import newComment from './style.module.css'
 import './validation.css'
 
 class CreateNewComment extends React.PureComponent {
-
   static propTypes = {
     addNewComment: PropTypes.func.isRequired,
     validateForm: PropTypes.func,

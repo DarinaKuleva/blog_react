@@ -1,14 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import editPost from '../../actions/editPost'
-import FormErrors from '../FormError'
 import PropTypes from 'prop-types'
+import FormErrors from '../FormError'
+import editPost from '../../actions/editPost'
+
 import createPost from '../CreateNewPost/style.module.css'
 import blog from '../Posts/style.module.css'
 
 class EditPost extends React.PureComponent {
-
   static propTypes = {
     editPost: PropTypes.func.isRequired,
     validateForm: PropTypes.func,

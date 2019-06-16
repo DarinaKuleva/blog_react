@@ -2,15 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import postsFetchData from '../../fetch/fetchPost'
 import ViewCommentsButton from '../ViewCommentsBtn'
 import SearchPostBar from '../SearchPostBar'
 import RemovePost from '../RemovePost'
-import removePost from '../../actions/removePost'
 import LikePost from '../LikePost'
 import DislikePost from '../DislikePost'
+import postsFetchData from '../../fetch/fetchPost'
+import Filter from '../Filter'
 import likePost from '../../actions/likePost'
 import dislikePost from '../../actions/dislikePost'
+import removePost from '../../actions/removePost'
 import {
   FILTER_MODE_ALL,
   FILTER_MODE_LIKE,
@@ -18,7 +19,6 @@ import {
   FILTER_MODE_ALPHABET,
   FILTER_MODE_RESET,
 } from '../../constants/index'
-import Filter from '../Filter'
 
 import blog from './style.module.css'
 

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import blog from '../Posts/style.module.css'
 
 class RemovePost extends React.PureComponent {
-
   static propTypes = {
     removePost: PropTypes.func.isRequired
   }

@@ -1,10 +1,10 @@
 import React from 'react'
-import Comments from '../Comments'
 import PropTypes from 'prop-types'
+import Comments from '../Comments'
+
 import blog from '../Posts/style.module.css'
 
 class ViewCommentsButton extends React.PureComponent {
-
   static propTypes = {
     commentId: PropTypes.number.isRequired,
   }
