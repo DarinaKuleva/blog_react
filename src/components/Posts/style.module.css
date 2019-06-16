@@ -2,6 +2,10 @@ a {
   text-decoration: none;
 }
 
+ul {
+  padding: 0;
+}
+
 .loading {
   position: absolute;
   top: 50%;
@@ -43,7 +47,7 @@ a {
 }
 
 .container {
-  width: 80%;
+  width: 70%;
   margin: 0 auto;
   padding-top: 30px;
 }
@@ -82,7 +86,6 @@ a {
   display: flex;
   flex-wrap: nowrap;
   width: 80%;
-  margin: 0 auto;
 
   border: 1px solid #4159ff;
   border-right: none;
@@ -113,7 +116,6 @@ a {
 
   background-color: #fff;
   border: 1px solid #4159ff;
-  border-radius: 20px;
   cursor: pointer;
 }
 
@@ -123,15 +125,6 @@ a {
 
   background-color: #a82bff;
   border: 1px solid #fff;
-  -webkit-transform: scale(1.05);
-  -ms-transform: scale(1.05);
-  transform: scale(1.05);
-}
-
-.create:active {
-  -webkit-transform: scale(0.95);
-  -ms-transform: scale(0.95);
-  transform: scale(0.95);
 }
 
 .posts {
