@@ -10,6 +10,7 @@ import './validation.css'
 class CreateNewComment extends React.PureComponent {
   static propTypes = {
     addNewComment: PropTypes.func.isRequired,
+    publicComment: PropTypes.func,
     validateForm: PropTypes.func,
     postId: PropTypes.number
   }
