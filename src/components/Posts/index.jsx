@@ -57,6 +57,10 @@ class Posts extends React.PureComponent {
       <section className={blog.container}>
         <div className={blog.header}>
           <h1 className={blog.logo}>Blog</h1>
+          <div className={blog.sorting}>
+            <Filter
+              changeFilterMode={this.changeFilterMode}/>
+          </div>
           <Link to={`/create-post`}>
             <button className={blog.create}>
               CREATE NEW POST
@@ -64,10 +68,10 @@ class Posts extends React.PureComponent {
           </Link>
         </div>
         <SearchPostBar/>
-        <div className={blog.sorting}>
-          <Filter
-            changeFilterMode={this.changeFilterMode}/>
-        </div>
+        {/*<div className={blog.sorting}>*/}
+          {/*<Filter*/}
+            {/*changeFilterMode={this.changeFilterMode}/>*/}
+        {/*</div>*/}
         <ul className={blog.posts}>
           {posts.map((post) => (
             <li key={post.id}
