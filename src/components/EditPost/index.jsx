@@ -49,10 +49,10 @@ class EditPost extends React.PureComponent {
           <div className={createPost.form_item}>
             <input id="changePostTitle"
                    name="postTitle"
-                   placeholder={ openPost.title }
+                   defaultValue={openPost.title}
                    type="text"
                    value={ this.props.postTitle }
-                   onChange={ this.handleChangePost }
+                   onChange={ this.handleChangePostTitle }
                    className={createPost.form_input}
                    required/>
             <label htmlFor="changePostTitle"
@@ -63,9 +63,9 @@ class EditPost extends React.PureComponent {
           <div className={createPost.form_item}>
             <textarea id="changePostBody"
                       name="postBody"
-                      placeholder={ openPost.body }
-                      value={ this.state.postBody }
-                      onChange={ this.handleChangePost }
+                      defaultValue={openPost.body}
+                      value={ this.props.postBody }
+                      onChange={ this.handleChangePostBody }
                       className={createPost.form_textarea}
                       required/>
             <label htmlFor="changePostBody"
@@ -94,13 +94,30 @@ class EditPost extends React.PureComponent {
     )
   }
 
-  handleChangePost = ( e ) => {
+  handleChangePostTitle = ( e ) => {
     const name = e.target.name
     const value = e.target.value
+    const defaultValue = document.getElementById('changePostBody').defaultValue
     this.setState( { [name]: value },
       () => {
         this.validateField( name, value )
       } )
+    if (this.state.postBody === '') {
+      this.setState({ postBody: defaultValue })
+    }
+  }
+
+  handleChangePostBody = ( e ) => {
+    const name = e.target.name
+    const value = e.target.value
+    const defaultValue = document.getElementById('changePostTitle').defaultValue
+    this.setState( { [name]: value },
+      () => {
+        this.validateField( name, value )
+      } )
+    if (this.state.postTitle === '') {
+      this.setState({ postTitle: defaultValue })
+    }
   }
 
   validateField( fieldName, value ) {
@@ -114,7 +131,7 @@ class EditPost extends React.PureComponent {
         fieldValidationErrors.postTitle = postTitleValid ? '' : 'Post title is too short'
         break
       case 'postBody':
-        postBodyValid = value.length >= 20
+        postBodyValid = value.length >= 3
         fieldValidationErrors.postBody = postBodyValid ? '' : 'Post is too short'
         break
       default:
@@ -128,7 +145,7 @@ class EditPost extends React.PureComponent {
   }
 
   validateForm() {
-    this.setState( { formValid: this.state.postTitleValid && this.state.postBodyValid } )
+    this.setState( { formValid: this.state.postTitleValid || this.state.postBodyValid } )
   }
 
   changePost = () => {
@@ -152,3 +169,127 @@ const mapDispatchToProps = ( dispatch ) => {
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( EditPost )
+
+
+//     return (
+//       <div className={createPost.container}>
+//         <div className={createPost.header}>
+//           <Link to="/" className={blog.button}>
+//             BACK TO POSTS
+//           </Link>
+//           <h2 className={createPost.caption}>EDIT POST</h2>
+//         </div>
+//         <form className={createPost.form}>
+//           <div className={createPost.form_item}>
+//             <input id="changePostTitle"
+//                    name="postTitle"
+//                    type="text"
+//                    defaultValue={openPost.title}
+//                    value={ this.props.postTitle }
+//                    onChange={ this.handleChangePost }
+//                    className={createPost.form_input}
+//                    required/>
+//             <label htmlFor="changePostTitle"
+//                    className={createPost.form_label}>
+//               Change post title...
+//             </label>
+//           </div>
+//           <div className={createPost.form_item}>
+//             <textarea id="changePostBody"
+//                       name="postBody"
+//                       defaultValue={openPost.body}
+//                       value={ this.props.postBody }
+//                       onChange={ this.handleChangePost }
+//                       className={createPost.form_textarea}
+//                       required/>
+//             <label htmlFor="changePostBody"
+//                    className={createPost.form_label}>
+//               Change post..
+//             </label>
+//           </div>
+//           <div>
+//             <FormErrors formErrors={ this.state.formErrors }/>
+//           </div>
+//           <Link to="/">
+//             { this.state.formValid ?
+//               <button
+//                 onClick={ this.changePost() }
+//                 disabled={ !this.state.formValid }
+//                 className={blog.create}>
+//                 EDIT POST
+//               </button>
+//               :
+//               <>
+//               </>
+//             }
+//           </Link>
+//         </form>
+//       </div>
+//     )
+//   }
+//
+//   handleChangePost = ( e ) => {
+//     const name = e.target.name
+//     const value = e.target.value
+//     this.setState({ [name]: value },
+//       () => {
+//         this.validateField(name, value)
+//       })
+//     // if (this.state.postBody === '') {
+//     //   this.setState({ postBody: defaultValue })
+//     // }
+//     // if (this.state.postTitle === '') {
+//     //   this.setState({ postTitle: defaultValue })
+//     // }
+//   }
+//
+//
+//   validateField( fieldName, value ) {
+//     let fieldValidationErrors = this.state.formErrors
+//     let postTitleValid = this.state.postTitleValid
+//     let postBodyValid = this.state.postBodyValid
+//
+//     switch ( fieldName ) {
+//       case 'postTitle':
+//         postTitleValid = value.length >= 3
+//         fieldValidationErrors.postTitle = postTitleValid ? '' : 'Post title is too short'
+//         break
+//       case 'postBody':
+//         postBodyValid = value.length >= 3
+//         fieldValidationErrors.postBody = postBodyValid ? '' : 'Post is too short'
+//         break
+//       default:
+//         break
+//     }
+//     this.setState( {
+//       formErrors: fieldValidationErrors,
+//       postTitleValid: postTitleValid,
+//       postBodyValid: postBodyValid,
+//     }, this.validateForm )
+//   }
+//
+//   validateForm() {
+//     this.setState( { formValid: this.state.postTitleValid || this.state.postBodyValid } )
+//   }
+//
+//   changePost = () => {
+//     const changePostTitle = this.state.postTitle
+//     const changePostBody = this.state.postBody
+//     const changePostId = this.props.match.params.postId
+//     this.props.editPost( changePostTitle, changePostBody, changePostId )
+//   }
+// }
+//
+// const mapStateToProps = ( state ) => {
+//   return {
+//     posts: state.posts.data,
+//   }
+// }
+//
+// const mapDispatchToProps = ( dispatch ) => {
+//   return {
+//     editPost: ( title, body, id ) => dispatch( editPost( title, body, id ) ),
+//   }
+// }
+//
+// export default connect( mapStateToProps, mapDispatchToProps )( EditPost )
