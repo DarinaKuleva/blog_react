@@ -28,8 +28,8 @@ class PostInformation extends React.PureComponent {
     } )
 
     return (
-      <div className={blog.container}>
-        <div className={postInformation.container}>
+      <div className={postInformation.container}>
+        <div className={postInformation.header}>
           <Link to="/" className={blog.button}>
             BACK TO POSTS
           </Link>
