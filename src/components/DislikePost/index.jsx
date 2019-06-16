@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import post from './style.module.css'
+import './dislike.css'
 
 class DislikePost extends React.PureComponent {
 
@@ -11,7 +11,8 @@ class DislikePost extends React.PureComponent {
 
   render() {
     return (
-      <button onClick={ this.props.dislikePost } className={post.dislike}>
+      <button onClick={ this.props.dislikePost }
+              className={ this.props.dislike ? 'dislike-active' : 'dislike'}>
       </button>
     )
   }

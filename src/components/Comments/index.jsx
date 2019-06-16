@@ -5,6 +5,7 @@ import { commentsFetchData } from '../../fetch/fetchComments'
 import NewCommentBtn from '../CreateNewComment'
 
 import commentBlock from './style.module.css'
+import blog from '../Posts/style.module.css'
 
 class Comments extends PureComponent {
 
@@ -30,11 +31,11 @@ class Comments extends PureComponent {
     } = this.props
 
     if ( failureRequest ) {
-      return <p>Sorry! There was an error loading the items</p>
+      return <p className={blog.error}>Sorry! There was an error loading the comments</p>
     }
 
     if ( isLoading ) {
-      return <p>Loading…</p>
+      return <p className={blog.loading}></p>
     }
 
     const openPost = comments.filter( commentItem => {

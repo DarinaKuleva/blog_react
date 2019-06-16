@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import post from './style.module.css'
+import './like.css'
 
 class LikePost extends React.PureComponent {
 
@@ -12,7 +12,7 @@ class LikePost extends React.PureComponent {
   render() {
     return (
       <button onClick={ this.props.likePost }
-      className={post.like}>
+              className={ this.props.like ? 'like-active' : 'like'}>
       </button>
     )
   }

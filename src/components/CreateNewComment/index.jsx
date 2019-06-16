@@ -1,7 +1,6 @@
 import React from 'react'
 import addNewComment from '../../actions/addNewComment'
 import { connect } from 'react-redux'
-import FormErrors from '../FormError'
 import PropTypes from 'prop-types'
 
 

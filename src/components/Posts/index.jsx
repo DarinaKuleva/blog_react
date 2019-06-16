@@ -48,10 +48,10 @@ class Posts extends React.PureComponent {
     const posts = this.getTodoList()
 
     if (failureRequest) {
-      return <p>Sorry! There was an error loading the items</p>
+      return <p className={blog.error}>Sorry! There was an error loading the posts</p>
     }
     if (isLoading) {
-      return <p>Loading…</p>
+      return <p className={blog.loading}></p>
     }
     return (
       <section className={blog.container}>
@@ -86,8 +86,8 @@ class Posts extends React.PureComponent {
                 <ViewCommentsButton commentId={post.id}/>
               </div>
               <div className={blog.posts_rating}>
-                <LikePost likePost={() => this.props.likePost(post.id)}/>
-                <DislikePost dislikePost={() => this.props.dislikePost(post.id)}/>
+                <LikePost likePost={() => this.props.likePost(post.id)} like={ post.like}/>
+                <DislikePost dislikePost={() => this.props.dislikePost(post.id)} dislike={ post.dislike}/>
               </div>
             </li>
           ))}
