@@ -86,8 +86,8 @@ class Posts extends React.PureComponent {
                 <ViewCommentsButton commentId={post.id}/>
               </div>
               <div className={blog.posts_rating}>
-                <LikePost likePost={() => this.props.likePost(post.id)}/>
-                <DislikePost dislikePost={() => this.props.dislikePost(post.id)}/>
+                <LikePost likePost={() => this.props.likePost(post.id)} like={ post.like}/>
+                <DislikePost dislikePost={() => this.props.dislikePost(post.id)} dislike={ post.dislike}/>
               </div>
             </li>
           ))}

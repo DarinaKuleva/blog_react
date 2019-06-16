@@ -21,3 +21,18 @@
   background-image: url('../../static/img/dislike-active.svg');
   transform: rotate(180deg);
 }
+
+.like-active {
+  position: absolute;
+
+  width: 20px;
+  height: 20px;
+
+  background: transparent;
+  background-image: url('../../static/img/dislike-active.svg');
+  background-position: center;
+  border: 0;
+  outline: none;
+  transform: rotate(180deg);
+  cursor: pointer;
+}
