@@ -4,12 +4,13 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 80px;
 }
 
 .input {
   width: 100%;
-  padding: 20px 40px;
+  padding: 14px 40px;
 
   border: 1px solid #4159ff;
 }
@@ -19,10 +20,10 @@
   right: 0;
   bottom: 50%;
 
-  width: 55px;
-  height: 55px;
-  margin-right: 10px;
-  margin-bottom: -27.5px;
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+  margin-bottom: -15px;
 
   background: transparent;
   background-image: url('../../static/img/search.svg');
@@ -39,7 +40,7 @@
 
   width: 20px;
   height: 20px;
-  margin-right: 80px;
+  margin-right: 60px;
   margin-bottom: -10px;
 
   background: transparent;
