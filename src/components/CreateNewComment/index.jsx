@@ -3,7 +3,11 @@ import addNewComment from '../../actions/addNewComment'
 import { connect } from 'react-redux'
 import FormErrors from '../FormError'
 import PropTypes from 'prop-types'
+
+
 import blog from '../Posts/style.module.css'
+import newComment from './style.module.css'
+import './validation.css'
 
 class CreateNewComment extends React.PureComponent {
 
@@ -18,7 +22,6 @@ class CreateNewComment extends React.PureComponent {
     userEmail: '',
     commentName: '',
     commentBody: '',
-    formErrors: { userEmail: '', commentName: '', commentBody: '' },
     postEmailValid: false,
     postNameValid: false,
     postBodyValid: false,
@@ -30,46 +33,55 @@ class CreateNewComment extends React.PureComponent {
       <>
         <button onClick={ this.createComment }
                 disabled={ this.state.open ? !this.state.formValid : this.state.formValid }
-        className={blog.create}>
-          { this.state.open ? 'PUBLIC NEW COMMENT' : 'CREATE NEW COMMENT' }
+                className={blog.create}>
+          { this.state.open ? 'PUBLIC NEW COMMENT' : 'CREATE NEW COMMENT'}
         </button>
         { this.state.open
-          ? <div>
-            <div>
-              <label htmlFor="commentName">Call your comment...</label>
+          ? <form className={newComment.form}>
+            <div className={newComment.form_item}>
               <input id="commentName"
                      name="commentName"
-                     placeholder="Title..."
+                     placeholder="Call your comment..."
                      type="text"
                      value={ this.state.commentName }
                      onChange={ this.handleCommentInput }
+                     className={this.state.commentNameValid ? 'form_input' : 'form_input form_input-invalid'}
                      required/>
+              <label htmlFor="commentName"
+                     className={'form_label'}>
+                Call your comment...
+              </label>
             </div>
-            <div>
-              <label htmlFor="userEmail">Your email...</label>
+            <div className={newComment.form_item}>
               <input id="userEmail"
                      name="userEmail"
-                     placeholder="Email..."
+                     placeholder="Write your email..."
                      type="email"
                      value={ this.state.userEmail }
                      onChange={ this.handleCommentInput }
+                     className={this.state.commentEmailValid ? 'form_input' : 'form_input form_input-invalid'}
                      required/>
+              <label htmlFor="userEmail"
+                     className={'form_label'}>
+                Write your email...
+              </label>
             </div>
-            <div>
-              <label htmlFor="commentBody">Write your comment ...</label>
+            <div className={newComment.form_item}>
               <textarea id="commentBody"
                         name="commentBody"
-                        placeholder="Comment..."
+                        placeholder=" Write your comment ..."
                         value={ this.state.commentBody }
                         onChange={ this.handleCommentInput }
+                        className={this.state.commentBodyValid ? 'form_textarea' : 'form_input form_textarea-invalid'}
                         required/>
+              <label htmlFor="commentBody"
+                     className={'form_label'}>
+                Write comment...
+              </label>
             </div>
-          </div>
+          </form>
           : <></>
         }
-        <div>
-          <FormErrors formErrors={ this.state.formErrors }/>
-        </div>
       </>
     )
   }
@@ -84,7 +96,6 @@ class CreateNewComment extends React.PureComponent {
   }
 
   validateField( fieldName, value ) {
-    let fieldValidationErrors = this.state.formErrors
     let commentEmailValid = this.state.commentEmailValid
     let commentNameValid = this.state.commentNameValid
     let commentBodyValid = this.state.commentBodyValid
@@ -92,21 +103,17 @@ class CreateNewComment extends React.PureComponent {
     switch ( fieldName ) {
       case 'userEmail':
         commentEmailValid = value.match( /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i )
-        fieldValidationErrors.commentEmail = commentEmailValid ? '' : 'Incorrect email'
         break
       case 'commentName':
         commentNameValid = value.length >= 3
-        fieldValidationErrors.commentName = commentNameValid ? '' : 'Title is too short'
         break
       case 'commentBody':
-        commentBodyValid = value.length >= 20
-        fieldValidationErrors.commentBody = commentBodyValid ? '' : 'Body is too short'
+        commentBodyValid = value.length >= 3
         break
       default:
         break
     }
     this.setState( {
-      formErrors: fieldValidationErrors,
       commentEmailValid: commentEmailValid,
       commentNameValid: commentNameValid,
       commentBodyValid: commentBodyValid,

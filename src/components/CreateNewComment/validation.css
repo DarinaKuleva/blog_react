@@ -1,0 +1,47 @@
+.form_input {
+  width: 100%;
+  padding: 10px 20px;
+
+  border: 1px solid #4159ff;
+}
+
+.form_input-invalid {
+  border: 1px solid #a0104c;
+}
+
+.form_textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px 20px;
+
+  border: 1px solid #4159ff;
+}
+
+.form_textarea-invalid {
+  border: 1px solid #a0104c;
+}
+
+.form_label {
+  position: absolute;
+  top: -20px;
+
+  margin-left: 20px;
+
+  color: #1c1a6d;
+  font-size: var(--font-size-small);
+
+  transform: translateY(0);
+  opacity: 1;
+
+  transition: all 0.2s ease-out;
+}
+
+.form_input:placeholder-shown + .form_label {
+  transform: translateY(1);
+  opacity: 0;
+}
+
+.form_textarea:placeholder-shown + .form_label {
+  transform: translateY(1);
+  opacity: 0;
+}

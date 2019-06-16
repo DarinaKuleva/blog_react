@@ -87,13 +87,14 @@
 
 .form_error::before {
   position: absolute;
-  left: -25px;
+  top: -10px;
+  left: -45px;
 
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
 
-  background-image: url('../../static/img/sad.svg');
-  background-size: 20px;
+  background-image: url('../../static/img/edit.svg');
+  background-size: 40px;
 
   content: '';
 }
